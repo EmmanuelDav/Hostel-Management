@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -23,13 +22,9 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -39,7 +34,6 @@
                         android:orientation="horizontal">
 
                         <TextView
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -49,10 +43,8 @@
                             android:textSize="21sp" />
 
                         <EditText
-
                             android:id="@+id/NameH"
                             android:layout_width="wrap_content"
-
                             android:layout_height="wrap_content"
                             android:layout_weight="11"
                             android:hint="Name of Hostel:"
@@ -77,7 +69,6 @@
                             android:textSize="21sp" />
 
                         <EditText
-
                             android:id="@+id/add"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -104,7 +95,6 @@
                             android:textSize="21sp" />
 
                         <EditText
-
                             android:id="@+id/dist"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -113,8 +103,6 @@
                             android:padding="5dp"
                             android:textColor="#000"
                             android:textSize="21sp" />
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -130,10 +118,9 @@
                             android:padding="5dp"
                             android:text="Rent(monthly) Per person: "
                             android:textColor="#000"
-                            android:textSize="21sp"></TextView>
+                            android:textSize="21sp" />
 
                         <EditText
-
                             android:id="@+id/rp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -142,7 +129,7 @@
                             android:inputType="phone"
                             android:padding="5dp"
                             android:textColor="#000"
-                            android:textSize="21sp"></EditText>
+                            android:textSize="21sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -157,19 +144,17 @@
                             android:padding="5dp"
                             android:text="Rent Total: "
                             android:textColor="#000"
-                            android:textSize="21sp"></TextView>
+                            android:textSize="21sp" />
 
                         <EditText
-
                             android:id="@+id/rt"
                             android:layout_width="match_parent"
-
                             android:layout_height="wrap_content"
                             android:hint="Number of people* Rent per person"
                             android:inputType="phone"
                             android:padding="5dp"
                             android:textColor="#000"
-                            android:textSize="21sp"></EditText>
+                            android:textSize="21sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -184,19 +169,16 @@
                             android:padding="5dp"
                             android:text="Hostel For: "
                             android:textColor="#000"
-                            android:textSize="21sp"></TextView>
+                            android:textSize="21sp" />
 
                         <Spinner
-
                             android:id="@+id/hf"
                             android:layout_width="match_parent"
-
                             android:layout_height="wrap_content"
                             android:entries="@array/HF"
                             android:padding="5dp"
                             android:textColor="#000"
-
-                            android:textSize="21sp"></Spinner>
+                            android:textSize="21sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -212,10 +194,9 @@
                             android:padding="5dp"
                             android:text="Number of Bedrooms: "
                             android:textColor="#000"
-                            android:textSize="21sp"></TextView>
+                            android:textSize="21sp" />
 
                         <Spinner
-
                             android:id="@+id/bed"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -223,7 +204,7 @@
                             android:entries="@array/BED"
                             android:padding="5dp"
                             android:textColor="#000"
-                            android:textSize="21sp"></Spinner>
+                            android:textSize="21sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -237,12 +218,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
                             android:padding="5dp"
-                            android:text="Number of Bathrooms: "
+                            android:text="Number of Bathrooms:"
                             android:textColor="#000"
-                            android:textSize="21sp"></TextView>
+                            android:textSize="21sp" />
 
                         <Spinner
-
                             android:id="@+id/nb"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -250,7 +230,7 @@
                             android:entries="@array/BATH"
                             android:padding="5dp"
                             android:textColor="#000"
-                            android:textSize="21sp"></Spinner>
+                            android:textSize="21sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -265,18 +245,16 @@
                             android:padding="5dp"
                             android:text="Number of people: "
                             android:textColor="#000"
-                            android:textSize="21sp"></TextView>
+                            android:textSize="21sp" />
 
                         <Spinner
-
                             android:id="@+id/np"
                             android:layout_width="match_parent"
-
                             android:layout_height="wrap_content"
                             android:entries="@array/PEO"
                             android:padding="5dp"
                             android:textColor="#000"
-                            android:textSize="21sp"></Spinner>
+                            android:textSize="21sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -291,18 +269,16 @@
                             android:padding="5dp"
                             android:text="Type: "
                             android:textColor="#000"
-                            android:textSize="21sp"></TextView>
+                            android:textSize="21sp" />
 
                         <Spinner
-
                             android:id="@+id/type"
                             android:layout_width="match_parent"
-
                             android:layout_height="wrap_content"
                             android:entries="@array/TY"
                             android:padding="5dp"
                             android:textColor="#000"
-                            android:textSize="21sp"></Spinner>
+                            android:textSize="21sp" />
                     </LinearLayout>
 
 
@@ -318,10 +294,9 @@
                             android:padding="5dp"
                             android:text="Phone Number: "
                             android:textColor="#000"
-                            android:textSize="21sp"></TextView>
+                            android:textSize="21sp" />
 
                         <EditText
-
                             android:id="@+id/phone1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -350,7 +325,7 @@
                             android:background="@drawable/selector_xml_btn_yellow"
                             android:gravity="center"
                             android:padding="10dp"
-                            android:text="Choose Image of hostel:"></Button>
+                            android:text="Choose Image of hostel:" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -367,7 +342,7 @@
                             android:padding="5dp"
                             android:text="No image selected"
                             android:textColor="#000"
-                            android:textSize="21sp"></TextView>
+                            android:textSize="21sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -385,7 +360,7 @@
                             android:background="@drawable/selector_xml_btn_yellow"
                             android:gravity="center"
                             android:padding="10dp"
-                            android:text="Record Hostel Location"></Button>
+                            android:text="Record Hostel Location" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -394,6 +369,7 @@
                         android:layout_margin="8dp"
                         android:gravity="center"
                         android:orientation="horizontal">
+
                         <Button
                             android:id="@+id/SUBMIT"
                             android:layout_width="wrap_content"
@@ -402,7 +378,7 @@
                             android:background="@drawable/selector_xml_btn_yellow"
                             android:gravity="center"
                             android:padding="10dp"
-                            android:text="Submit"></Button>
+                            android:text="Submit" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

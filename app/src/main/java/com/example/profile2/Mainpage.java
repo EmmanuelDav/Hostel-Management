@@ -125,6 +125,7 @@ public class Mainpage extends AppCompatActivity {
                 firebaseAuth.signOut();
                 Intent i = new Intent(Mainpage.this, MainActivity.class);
                 startActivity(i);
+                finish();
                 break;
             }
             case R.id.SRA: {

@@ -116,6 +116,7 @@ public class Register extends AppCompatActivity {
                                 Toast.makeText(Register.this, "User Already registered", Toast.LENGTH_SHORT).show();
                                 Intent i=new Intent(Register.this,MainActivity.class);
                                 startActivity(i);
+                                finish();
                             }
                         }
                     });
@@ -151,6 +152,7 @@ public class Register extends AppCompatActivity {
                                 });
                                 Intent intent=new Intent(Register.this,MainActivity.class);
                                 startActivity(intent);
+                                finish();
 
                             }
 

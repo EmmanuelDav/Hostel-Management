@@ -51,33 +51,43 @@ public class MapsActivity<lon> extends FragmentActivity implements OnMapReadyCal
      */
     @Override
     public void onMapReady(final GoogleMap googleMap) {
-        // mMap = googleMap;
+         mMap = googleMap;
         Intent i = getIntent();
 
 
         //  Log.e("Location", lat + lon + "");
 
-        FirebaseFirestore.getInstance().collection("hostellist").whereEqualTo("Name", i.getStringExtra("name"))
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (QueryDocumentSnapshot doc : task.getResult()) {
-
-                    lat = Double.parseDouble(doc.getString("Latitude"));
-                    lon = Double.parseDouble(doc.getString("Longitude"));
-                    Log.e("dsdsdsdgsgsg", lat + " " + lon + "");
-                    LatLng latLng = new LatLng(lat, lon);
-                    MarkerOptions markerOptions = new MarkerOptions()
-                            .position(latLng)
-                            .title("Hostel Location");
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
-                    googleMap.addMarker(markerOptions);
-                    break;
-                }
-            }
-        });
-
+//        FirebaseFirestore.getInstance().collection("hostellist").whereEqualTo("Name", i.getStringExtra("name"))
+//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                for (QueryDocumentSnapshot doc : task.getResult()) {
+//
+//                    lat = Double.parseDouble(doc.getString("Latitude"));
+//                    lon = Double.parseDouble(doc.getString("Longitude"));
+//                    Log.e("dsdsdsdgsgsg", lat + " " + lon + "");
+//                    LatLng latLng = new LatLng(21, 48);
+////                    MarkerOptions markerOptions = new MarkerOptions()
+////                            .position(latLng)
+////                            .title("Hostel Location");
+//                    mMap.addMarker(new MarkerOptions().position(latLng).title("Hostel Location"));
+////                    googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+////                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
+////                    googleMap.addMarker(markerOptions);
+//                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+//                    break;
+//                }
+//            }
+//        });
+        LatLng latLng = new LatLng(21, 48);
+//                    MarkerOptions markerOptions = new MarkerOptions()
+//                            .position(latLng)
+//                            .title("Hostel Location");
+        mMap.addMarker(new MarkerOptions().position(latLng).title("Hostel Location"));
+//                    googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+//                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
+//                    googleMap.addMarker(markerOptions);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
     }
 }

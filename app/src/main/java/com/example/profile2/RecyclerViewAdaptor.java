@@ -145,8 +145,6 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
             re = itemView.findViewById(R.id.rent);
             c = itemView.findViewById(R.id.card);
             forr = itemView.findViewById(R.id.For);
-
         }
-
     }
 };
