@@ -38,9 +38,10 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
+                            android:fontFamily="@font/gotham"
                             android:text="Name of Hostel:"
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/NameH"
@@ -48,8 +49,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="11"
                             android:hint="Name of Hostel:"
+                            android:fontFamily="@font/gotham"
                             android:padding="5dp"
-                            android:textColor="#000"
                             android:textSize="21sp" />
                     </LinearLayout>
 
@@ -64,9 +65,10 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
+                            android:fontFamily="@font/gotham"
                             android:text="Address of Hostel:"
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/add"
@@ -76,7 +78,7 @@
                             android:hint="Address"
                             android:padding="5dp"
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -89,10 +91,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:fontFamily="@font/gotham"
                             android:padding="5dp"
                             android:text="Distance From Pict(in Km): "
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/dist"
@@ -100,9 +103,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="11"
                             android:hint="Distance in Km"
+                            android:fontFamily="@font/gotham"
+
                             android:padding="5dp"
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -116,20 +121,22 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
                             android:padding="5dp"
+                            android:fontFamily="@font/gotham"
                             android:text="Rent(monthly) Per person: "
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/rp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="9"
+
                             android:hint="Rent per person in Rs"
                             android:inputType="phone"
                             android:padding="5dp"
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -143,8 +150,9 @@
                             android:layout_height="wrap_content"
                             android:padding="5dp"
                             android:text="Rent Total: "
+                            android:fontFamily="@font/gotham"
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/rt"
@@ -154,7 +162,7 @@
                             android:inputType="phone"
                             android:padding="5dp"
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -169,7 +177,8 @@
                             android:padding="5dp"
                             android:text="Hostel For: "
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:fontFamily="@font/gotham"
+                            android:textSize="18sp" />
 
                         <Spinner
                             android:id="@+id/hf"
@@ -177,8 +186,8 @@
                             android:layout_height="wrap_content"
                             android:entries="@array/HF"
                             android:padding="5dp"
-                            android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:fontFamily="@font/gotham"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -192,9 +201,10 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
                             android:padding="5dp"
+                            android:fontFamily="@font/gotham"
                             android:text="Number of Bedrooms: "
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
 
                         <Spinner
                             android:id="@+id/bed"
@@ -204,7 +214,7 @@
                             android:entries="@array/BED"
                             android:padding="5dp"
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -218,9 +228,10 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
                             android:padding="5dp"
+                            android:fontFamily="@font/gotham"
                             android:text="Number of Bathrooms:"
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
 
                         <Spinner
                             android:id="@+id/nb"
@@ -230,7 +241,7 @@
                             android:entries="@array/BATH"
                             android:padding="5dp"
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -244,6 +255,7 @@
                             android:layout_height="wrap_content"
                             android:padding="5dp"
                             android:text="Number of people: "
+                            android:fontFamily="@font/gotham"
                             android:textColor="#000"
                             android:textSize="21sp" />
 
@@ -254,7 +266,7 @@
                             android:entries="@array/PEO"
                             android:padding="5dp"
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -268,8 +280,9 @@
                             android:layout_height="wrap_content"
                             android:padding="5dp"
                             android:text="Type: "
+                            android:fontFamily="@font/gotham"
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
 
                         <Spinner
                             android:id="@+id/type"
@@ -278,7 +291,7 @@
                             android:entries="@array/TY"
                             android:padding="5dp"
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
                     </LinearLayout>
 
 
@@ -294,7 +307,8 @@
                             android:padding="5dp"
                             android:text="Phone Number: "
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:fontFamily="@font/gotham"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/phone1"
@@ -303,10 +317,11 @@
                             android:layout_weight="11"
                             android:hint="Phone Number"
                             android:inputType="phone"
+                            android:fontFamily="@font/gotham"
                             android:maxLength="10"
                             android:padding="5dp"
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
 
                     </LinearLayout>
 
@@ -324,6 +339,8 @@
                             android:layout_gravity="center"
                             android:background="@drawable/selector_xml_btn_yellow"
                             android:gravity="center"
+                            android:textColor="#fff"
+                            android:fontFamily="@font/gotham"
                             android:padding="10dp"
                             android:text="Choose Image of hostel:" />
                     </LinearLayout>
@@ -340,9 +357,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
+                            android:fontFamily="@font/gotham"
+
                             android:text="No image selected"
                             android:textColor="#000"
-                            android:textSize="21sp" />
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -359,6 +378,9 @@
                             android:layout_gravity="center"
                             android:background="@drawable/selector_xml_btn_yellow"
                             android:gravity="center"
+                            android:textColor="#fff"
+                            android:fontFamily="@font/gotham"
+
                             android:padding="10dp"
                             android:text="Record Hostel Location" />
                     </LinearLayout>
@@ -377,6 +399,8 @@
                             android:layout_gravity="center"
                             android:background="@drawable/selector_xml_btn_yellow"
                             android:gravity="center"
+                            android:textColor="#fff"
+                            android:fontFamily="@font/gotham"
                             android:padding="10dp"
                             android:text="Submit" />
                     </LinearLayout>

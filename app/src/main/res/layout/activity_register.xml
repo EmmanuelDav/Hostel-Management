@@ -1,98 +1,154 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
 
-    >
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
 
-    <LinearLayout
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/joinusbg" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:drawableLeft="@drawable/ic_keyboard_arrow_left_black_24dp"
+        android:fontFamily="@font/gotham"
+        android:gravity="center"
+        android:shadowColor="#57000000"
+        android:text="Register"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="bottom"
         android:orientation="vertical"
         android:padding="40dp">
 
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:src="@drawable/ic_house"/>
-
-        <EditText
-            android:id="@+id/name"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:ems="10"
-            android:hint="Name"
-            android:inputType="textEmailAddress"
-            android:paddingLeft="0dp"
-            android:textColor="#000"
+            android:layout_marginTop="16dp"
+            android:textColorHint="#000000">
 
-            android:textColorHint="#999"
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:ems="10"
+                android:fontFamily="@font/calibri"
+                android:hint="Name"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="0dp"
+                android:textColor="#000"
+                android:textColorHint="#999" />
 
-            />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/mail"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Email-id"
-            android:inputType="textEmailAddress"
-            android:paddingLeft="0dp"
-            android:textColor="#000"
-            android:textColorHint="#999" />
+            android:layout_marginTop="16dp"
+            android:textColorHint="#000000">
 
-        <EditText
-            android:id="@+id/mobile"
-            style="@android:style/Widget.EditText"
+            <EditText
+                android:id="@+id/mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/calibri"
+                android:hint="Email-id"
+
+                android:inputType="textEmailAddress"
+                android:paddingLeft="0dp"
+                android:textColor="#000"
+                android:textColorHint="#999" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Phone"
-            android:inputType="number"
-            android:maxLength="10"
-            android:onClick="check"
-            android:paddingLeft="0dp"
-            android:textColor="#000"
+            android:layout_marginTop="16dp"
+            android:textColorHint="#000000">
 
-            android:textColorHint="#999"
+            <EditText
+                android:id="@+id/mobile"
+                style="@android:style/Widget.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/calibri"
 
-            />
+                android:hint="Phone"
+                android:inputType="number"
+                android:maxLength="10"
+                android:onClick="check"
+                android:paddingLeft="0dp"
+                android:textColor="#000"
+                android:textColorHint="#999" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/password"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/ic_lock_black_24dp"
-            android:drawablePadding="5dp"
-            android:ems="10"
-            android:hint="Password( atleast 6 characters)"
-            android:inputType="textPassword"
-            android:paddingLeft="0dp"
-            android:textColor="#000"
-            android:textColorHint="#999" />
+            android:layout_marginTop="16dp"
+            android:textColorHint="#000000">
 
-        <EditText
-            android:id="@+id/rpassword"
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_lock_black_24dp"
+                android:drawablePadding="5dp"
+                android:ems="10"
+                android:fontFamily="@font/calibri"
+                android:hint="Password( atleast 6 characters)"
+                android:inputType="textPassword"
+                android:paddingLeft="0dp"
+                android:textColor="#000"
+                android:textColorHint="#999" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/ic_lock_black_24dp"
-            android:drawablePadding="5dp"
-            android:ems="10"
-            android:hint="Retype Password( atleast 6 characters)"
-            android:inputType="textPassword"
-            android:paddingLeft="0dp"
-            android:textColor="#000"
-            android:textColorHint="#999"
+            android:textColorHint="#000000">
 
-            />
-        <!--        android:drawableLeft="@mipmap/lock"-->
+            <EditText
+                android:id="@+id/rpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_lock_black_24dp"
+                android:drawablePadding="5dp"
+                android:ems="10"
+                android:fontFamily="@font/calibri"
+                android:hint="Retype Password( atleast 6 characters)"
+                android:inputType="textPassword"
+                android:paddingLeft="0dp"
+                android:textColor="#000"
+                android:textColorHint="#999" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -101,25 +157,28 @@
                 android:padding="5dp"
                 android:text="Type Of User"
                 android:textColor="#000"
-                android:textSize="21sp"/>
+                android:textSize="21sp" />
 
             <Spinner
                 android:id="@+id/Atype"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:entries="@array/LoginType"/>
+                android:layout_height="wrap_content"
+                android:entries="@array/LoginType" />
         </LinearLayout>
 
         <Button
             android:id="@+id/signup"
-            android:layout_width="match_parent"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/selector_xml_btn_yellow"
-            android:onClick="checkLogin"
-            android:text="SignUp" />
-
-
-    </LinearLayout>
-</ScrollView>
+            android:layout_gravity="center"
+            android:layout_marginTop="44dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/buttonshape"
+            android:fontFamily="@font/gotham"
+            android:text="SignUp"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</RelativeLayout>
