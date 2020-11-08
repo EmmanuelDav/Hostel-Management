@@ -1,29 +1,22 @@
-<ScrollView android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
 
     >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="40dp"
-
-
-        >
-        <!--android:background="@mipmap/back_login"-->
-<!--        android:background="@drawable/bg_login"-->
+        android:padding="40dp">
 
         <ImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_house"
             android:layout_marginTop="50dp"
-            ></ImageView>
+            android:src="@drawable/ic_house"/>
 
-
-        <!--        android:drawableLeft="@mipmap/account"-->
         <EditText
             android:id="@+id/name"
             android:layout_width="match_parent"
@@ -40,98 +33,92 @@
             />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:ems="10"
             android:id="@+id/mail"
-            android:hint="Email-id"
-
-            android:textColor="#000"
-            android:paddingLeft="0dp"
-
-            android:textColorHint="#999"
-
-            />
-        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
             android:ems="10"
+            android:hint="Email-id"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="0dp"
+            android:textColor="#000"
+            android:textColorHint="#999" />
+
+        <EditText
             android:id="@+id/mobile"
+            style="@android:style/Widget.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Phone"
+            android:inputType="number"
             android:maxLength="10"
             android:onClick="check"
-            android:hint="Phone"
-style="@android:style/Widget.EditText"
-            android:textColor="#000"
             android:paddingLeft="0dp"
+            android:textColor="#000"
 
             android:textColorHint="#999"
 
             />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
             android:id="@+id/password"
-            android:hint="Password( atleast 6 characters)"
-            android:layout_marginTop="10dp"
-            android:textColor="#000"
-            android:paddingLeft="0dp"
-            android:drawablePadding="5dp"
-            android:textColorHint="#999"
-            android:drawableLeft="@drawable/ic_lock_black_24dp"
-
-            />
-
-        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/rpassword"
-            android:hint="Retype Password( atleast 6 characters)"
             android:layout_marginTop="10dp"
-            android:textColor="#000"
-            android:paddingLeft="0dp"
-            android:drawablePadding="5dp"
-            android:textColorHint="#999"
             android:drawableLeft="@drawable/ic_lock_black_24dp"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:hint="Password( atleast 6 characters)"
+            android:inputType="textPassword"
+            android:paddingLeft="0dp"
+            android:textColor="#000"
+            android:textColorHint="#999" />
+
+        <EditText
+            android:id="@+id/rpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/ic_lock_black_24dp"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:hint="Retype Password( atleast 6 characters)"
+            android:inputType="textPassword"
+            android:paddingLeft="0dp"
+            android:textColor="#000"
+            android:textColorHint="#999"
 
             />
         <!--        android:drawableLeft="@mipmap/lock"-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Type Of User"
-            android:textColor="#000"
-            android:padding="5dp"
-            android:textSize="21sp"></TextView>
-        <Spinner
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:entries="@array/LoginType"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Type Of User"
+                android:textColor="#000"
+                android:textSize="21sp"/>
+
+            <Spinner
                 android:id="@+id/Atype"
-            ></Spinner>
-    </LinearLayout>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:entries="@array/LoginType"/>
+        </LinearLayout>
+
         <Button
+            android:id="@+id/signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="SignUp"
-            android:id="@+id/signup"
-            android:background="@drawable/selector_xml_btn_yellow"
             android:layout_gravity="center_horizontal"
-            android:onClick="checkLogin"/>
-
+            android:layout_marginTop="30dp"
+            android:background="@drawable/selector_xml_btn_yellow"
+            android:onClick="checkLogin"
+            android:text="SignUp" />
 
 
     </LinearLayout>

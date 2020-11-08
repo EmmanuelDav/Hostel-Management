@@ -126,18 +126,18 @@ public class Register extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
 //                                progressBar.setVisibility(View.GONE);
-                                String AA="User";
-                                String ATYPE=spin.getSelectedItem().toString();
-                                if(ATYPE.equals("Hostel Owner")) {
-                                    AA="Owner";
+                                String AA = "User";
+                                String ATYPE = spin.getSelectedItem().toString();
+                                if (ATYPE.equals("Hostel Owner")) {
+                                    AA = "Owner";
                                 }
 //                                User user=new User(u,nn,pp,AA);
-                                Map<String,String> user=new HashMap<>();
-                                user.put("Name",nn);
-                                user.put("Username",u);
-                                user.put("Phone",pp);
-                                user.put("AccountType",AA);
-                                FirebaseFirestore db=FirebaseFirestore.getInstance();
+                                Map<String, String> user = new HashMap<>();
+                                user.put("Name", nn);
+                                user.put("Username", u);
+                                user.put("Phone", pp);
+                                user.put("AccountType", AA);
+                                FirebaseFirestore db = FirebaseFirestore.getInstance();
                                 db.collection("Users").document(u).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
@@ -150,15 +150,11 @@ public class Register extends AppCompatActivity {
                                         Log.d(TAG, "adding data t firestore failed " + e.toString());
                                     }
                                 });
-                                Intent intent=new Intent(Register.this,MainActivity.class);
+                                Intent intent = new Intent(Register.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
-
                             }
-
-
                         }
-
 
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -168,8 +164,6 @@ public class Register extends AppCompatActivity {
                     });
 
                 }
-
-
             }
         });
     }

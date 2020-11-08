@@ -21,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +62,7 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
         holder.dist.setText(String.valueOf(e.getDistance()));
         holder.ph.setText(String.valueOf(e.getPhone()));
         holder.re.setText(String.valueOf(e.getRent()));
-        holder.image.setImageDrawable(context.getResources().getDrawable(e.getImage()));
+        Picasso.get().load(e.getUrl()).error(R.drawable.ic_house).into(holder.image);
         holder.forr.setText("For:" + e.getHf());
         holder.c.setOnClickListener(new View.OnClickListener() {
             @Override
