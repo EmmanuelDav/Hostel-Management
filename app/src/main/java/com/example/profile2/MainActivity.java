@@ -9,6 +9,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,9 +25,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     TextView newUserSignIn;
     Button signIn;
     FirebaseAuth fb;
+    AlertDialog.Builder builder;
+    AlertDialog progressDialog;
 
     @Override
     protected void onStart() {
@@ -47,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         fb = FirebaseAuth.getInstance();
+        progressDialog = getDialogProgressBar().create();
+        progressDialog.setCanceledOnTouchOutside(false);
         newUserSignIn = (TextView) findViewById(R.id.register);
         signIn = findViewById(R.id.button);
         emailEditText = findViewById(R.id.mail);
@@ -55,11 +60,13 @@ public class MainActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.show();
                 final String email, password;
                 email = emailEditText.getText().toString().trim();
                 password = passEditText.getText().toString().trim();
                 final FirebaseFirestore db = FirebaseFirestore.getInstance();
                 if (email.length() == 0 || password.length() == 0) {
+                    progressDialog.dismiss();
                     Toast.makeText(MainActivity.this, "Login fields cannot be empty", Toast.LENGTH_SHORT).show();
                 } else {
                     fb.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -84,10 +91,12 @@ public class MainActivity extends AppCompatActivity {
                                                     break;
                                                 }
                                             }
+                                            progressDialog.dismiss();
                                             if (x == 0) {
                                                 Intent i1 = new Intent(MainActivity.this, Mainpage.class);
                                                 startActivity(i1);
                                             } else {
+
                                                 Intent i = new Intent(MainActivity.this, Owner.class);
                                                 i.putExtra("Username", email);
                                                 startActivity(i);
@@ -98,7 +107,9 @@ public class MainActivity extends AppCompatActivity {
                                 });
 
                             } else {
+                                progressDialog.dismiss();
                                 Toast.makeText(MainActivity.this, "Login Unsuccessful", Toast.LENGTH_SHORT).show();
+                              //  Log.d(TAG,"Login Failed because "+task.getResult().toString());
                             }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -121,4 +132,13 @@ public class MainActivity extends AppCompatActivity {
         emailEditText = (EditText) findViewById(R.id.mail);
         passEditText = (EditText) findViewById(R.id.password);
     }
+
+    public AlertDialog.Builder getDialogProgressBar() {
+        if (builder == null) {
+            builder = new AlertDialog.Builder(this);
+            builder.setView(R.layout.dialog);
+        }
+        return builder;
+    }
+
 }

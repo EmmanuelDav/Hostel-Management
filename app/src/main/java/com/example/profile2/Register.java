@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,6 +32,9 @@ public class Register extends AppCompatActivity {
     Button signup;
     Spinner spin;
     FirebaseAuth fb;
+    AlertDialog.Builder builder;
+    AlertDialog progressDialog;
+
 
     public void check(View v) {
         mobile = (EditText) findViewById(R.id.mobile);
@@ -43,7 +47,8 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         mobile=(EditText)findViewById(R.id.mobile);
-
+        progressDialog = getDialogProgressBar().create();
+        progressDialog.setCanceledOnTouchOutside(false);
         name=(EditText)findViewById(R.id.name);
         mail=findViewById(R.id.mail);
         pass=findViewById(R.id.password);
@@ -55,6 +60,7 @@ public class Register extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.show();
                 String phh = mobile.getText().toString().trim();
                 if(phh.length()<10)mobile.setError("Enter Valid Phone Number");
                 String e=mail.getText().toString().trim();
@@ -113,6 +119,7 @@ public class Register extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if(task!=null)
                             {
+                                progressDialog.dismiss();
                                 Toast.makeText(Register.this, "User Already registered", Toast.LENGTH_SHORT).show();
                                 Intent i=new Intent(Register.this,MainActivity.class);
                                 startActivity(i);
@@ -141,15 +148,19 @@ public class Register extends AppCompatActivity {
                                 db.collection("Users").document(u).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
+                                        progressDialog.dismiss();
                                         Toast.makeText(Register.this, "User Signup Successful", Toast.LENGTH_SHORT).show();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(Register.this, "User Signup Unsuccessful", Toast.LENGTH_SHORT).show();
+                                        progressDialog.dismiss();
+                                        Toast.makeText(Register.this, "Us" +
+                                                "er Signup Unsuccessful", Toast.LENGTH_SHORT).show();
                                         Log.d(TAG, "adding data t firestore failed " + e.toString());
                                     }
                                 });
+                                progressDialog.dismiss();
                                 Intent intent = new Intent(Register.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -159,7 +170,7 @@ public class Register extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception pE) {
-
+progressDialog.dismiss();
                         }
                     });
 
@@ -167,4 +178,12 @@ public class Register extends AppCompatActivity {
             }
         });
     }
+    public AlertDialog.Builder getDialogProgressBar() {
+        if (builder == null) {
+            builder = new AlertDialog.Builder(this);
+            builder.setView(R.layout.dialog);
+        }
+        return builder;
+    }
+
 }
