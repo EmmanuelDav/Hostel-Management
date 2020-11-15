@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            tools:context=".details">
+            tools:context=".HostelDetails">
 
             <include
                 android:id="@+id/toolbar"
@@ -61,7 +61,7 @@
                             android:padding="5dp"
                             android:fontFamily="@font/gotham"
                             android:shadowColor="#57000000"
-                            android:text="Name:"
+                            android:text="Hostel Name:"
                             android:textSize="18sp"
                             android:textColor="#000"
                             android:textStyle="bold" />
@@ -89,7 +89,7 @@
                             android:padding="5dp"
                             android:fontFamily="@font/gotham"
                             android:textSize="18sp"
-                            android:text="Address:"
+                            android:text="Hostel Address:"
                             android:textColor="#000"
                             android:textStyle="bold" />
 
@@ -318,6 +318,15 @@
                             android:text="Paying Guest"
                             android:textSize="21sp" />
                     </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="match_parent"
+                        android:layout_margin="20dp"
+                        android:id="@+id/hostelOccupant"
+                        android:background="@drawable/buttonshape"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:layout_height="wrap_content"
+                        android:text="View Hostel Occupant"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"

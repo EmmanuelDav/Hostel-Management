@@ -1,4 +1,4 @@
-package com.example.profile2;
+package com.example.profile2.model;
 
 import java.io.Serializable;
 

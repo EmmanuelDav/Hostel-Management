@@ -33,7 +33,7 @@ public class Owner extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                Intent I = new Intent(Owner.this, MainActivity.class);
+                Intent I = new Intent(Owner.this, SignInActivity.class);
                 startActivity(I);
                 finish();
             }

@@ -48,7 +48,7 @@
                 android:drawablePadding="5dp"
                 android:ems="10"
                 android:fontFamily="@font/calibri"
-                android:hint="Username"
+                android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="0dp"
                 android:textColor="#000"

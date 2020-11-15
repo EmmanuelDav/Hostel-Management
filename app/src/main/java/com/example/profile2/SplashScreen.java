@@ -36,7 +36,7 @@ private ProgressBar progress;
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    SplashScreen.this.startActivity(new Intent(SplashScreen.this,MainActivity.class));
+                    SplashScreen.this.startActivity(new Intent(SplashScreen.this, SignInActivity.class));
                     SplashScreen.this.finish();
                 }
             },4000);

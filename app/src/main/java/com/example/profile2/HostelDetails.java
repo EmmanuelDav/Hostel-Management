@@ -14,12 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.example.profile2.model.Entry;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class details extends AppCompatActivity {
-    //    FirebaseFirestore fb;
-//    List<Entry> li;
+public class HostelDetails extends AppCompatActivity {
     int Pick = 234;
     ImageView imageH;
     private StorageReference storageReference;
@@ -64,7 +63,7 @@ public class details extends AppCompatActivity {
         name.setText(e.getName().toString());
         add.setText(e.getAdd().toString());
         String z = e.getDistance().toString();
-        Glide.with(getApplicationContext()).load(e.getUrl()).into(imageH);
+        Glide.with(getApplicationContext()).load(e.getUrl()).placeholder(R.drawable.splash).into(imageH);
         dist.setText(z.substring(9));
         rp.setText(e.getRp().toString());
         rt.setText(e.getRt().toString());
@@ -77,7 +76,7 @@ public class details extends AppCompatActivity {
         Loc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent iloc = new Intent(details.this, MapsActivity.class);
+                Intent iloc = new Intent(HostelDetails.this, MapsActivity.class);
                 iloc.putExtra("name", e.getName());
                 startActivity(iloc);
             }
@@ -92,9 +91,13 @@ public class details extends AppCompatActivity {
                 try {
                     startActivity(ni);
                 } catch (SecurityException ex) {
-                    Toast.makeText(details.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HostelDetails.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
+        });
+        findViewById(R.id.hostelOccupant).setOnClickListener(view ->{
+            DialogFragment sDialogFragment = new DialogFragment();
+            sDialogFragment.show(getSupportFragmentManager(),"Fragment");
         });
 
     }

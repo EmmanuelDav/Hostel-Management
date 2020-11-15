@@ -10,17 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.profile2.model.Entry;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -61,12 +57,12 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
         holder.dist.setText(String.valueOf(e.getDistance()));
         holder.ph.setText(String.valueOf(e.getPhone()));
         holder.re.setText(String.valueOf(e.getRent()));
-        Picasso.get().load(e.getUrl()).error(R.drawable.ic_house).into(holder.image);
+        Picasso.get().load(e.getUrl()).placeholder(R.drawable.ic_house).into(holder.image);
         holder.forr.setText("For:" + e.getHf());
         holder.c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, details.class);
+                Intent i = new Intent(context, HostelDetails.class);
                 i.putExtra("Entry", (Entry) e);
                 context.startActivity(i);
             }
@@ -139,7 +135,7 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.image);
+            image = itemView.findViewById(R.id.profilePic);
             name = itemView.findViewById(R.id.name);
             dist = itemView.findViewById(R.id.distance);
             ph = itemView.findViewById(R.id.phone);

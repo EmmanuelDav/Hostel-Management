@@ -2,12 +2,17 @@ package com.example.profile2;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,9 +23,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -54,64 +61,35 @@ public class OwnerAdd extends AppCompatActivity {
     String URLIMAGE;
     int rrq = 123;
     static int COUNTER = 0;
+    LocationManager locationManager;
     Task<Uri> urlTask;
     private Uri filepath;
     double lat, lon;
     Map<String, String> map;
     private ProgressDialog mProgressDialog;
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == rrq && data.getData() != null) {
-            filepath = data.getData();
-            SelectedImage.setText(data.getDataString());
-        }
-    }
-
-    public void upload() {
-        if (filepath != null) {
-            mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setTitle("Uploading Image..");
-            mProgressDialog.show();
-            StorageReference sr = FirebaseStorage.getInstance().getReference();
-            Random rand = new Random();
-            COUNTER = rand.nextInt(1000000);
-            String imagePath = "images/" + Username + String.valueOf(COUNTER) + ".jpg";
-            COUNTER++;
-            final StorageReference imgpoint = sr.child(imagePath);
-            UploadTask uploadTask = imgpoint.putFile(filepath);
-            urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
-                    } else {
-                        mProgressDialog.dismiss();
-                    }
-                    // Continue with the task to get the download URL
-                    return imgpoint.getDownloadUrl();
-                }
-            });
-        } else {
-            Toast.makeText(this, "Error No file selected", Toast.LENGTH_SHORT).show();
-        }
-    }
+    private static final int LocationPermission = 124;
+    private static final String TAG = OwnerAdd.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_add);
+        checkLocationPermission();
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Intent it = getIntent();
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         lat = 0.0;
         lon = 0.0;
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         RecordLocation = findViewById(R.id.LOcation);
         RecordLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fetchLastLocation();
-                Toast.makeText(OwnerAdd.this, "Current GPS Location recorded as Hostel Location", Toast.LENGTH_SHORT).show();
+                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) && !locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                    OnGPS();
+                } else {
+                    getLocation();
+                    fetchLastLocation();
+                }
             }
         });
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -155,8 +133,9 @@ public class OwnerAdd extends AppCompatActivity {
                 boolean Px = true;
                 if (PHone.length() != 10) {
                     Toast.makeText(OwnerAdd.this, "Phone number should be 10 digits", Toast.LENGTH_SHORT).show();
-                } else if (name.isEmpty() || mAddress.isEmpty() || mDistance.isEmpty() || mRentPerPerson.isEmpty() || mRent.isEmpty() || mSelectedImage.equals("no image selected")) {
-                    Toast.makeText(OwnerAdd.this, "All fields Must be filled", Toast.LENGTH_LONG).show();
+                } else if (name.isEmpty() || mAddress.isEmpty() || mDistance.isEmpty() || mRentPerPerson.isEmpty()
+                        || mRent.isEmpty() || mSelectedImage.equals("no image selected")) {
+                    Toast.makeText(OwnerAdd.this, "All fields Must be filled especially The record Location ", Toast.LENGTH_LONG).show();
                 } else {
                     if (!internetIsConnected()) {
                         Px = false;
@@ -165,21 +144,21 @@ public class OwnerAdd extends AppCompatActivity {
                         upload();
                     }
                     if (Px) {
-                        if (urlTask != null){
+                        if (urlTask != null) {
                             urlTask.addOnCompleteListener(new OnCompleteListener<Uri>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     if (task.isSuccessful()) {
                                         Uri downloadUri = task.getResult();
                                         URLIMAGE = downloadUri.toString();
-                                        Toast.makeText(OwnerAdd.this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                                        // Toast.makeText(OwnerAdd.this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
                                         submitData();
                                     } else {
                                         Toast.makeText(OwnerAdd.this, "Image Uploaded Failed", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
-                        }else {
+                        } else {
                             Toast.makeText(OwnerAdd.this, "No Image Selected", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -188,12 +167,70 @@ public class OwnerAdd extends AppCompatActivity {
         });
     }
 
-    private void fetchLastLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{
-                    Manifest.permission.ACCESS_FINE_LOCATION}, 101);
-            return;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+            if (requestCode == rrq && data.getData() != null) {
+                filepath = data.getData();
+                SelectedImage.setText(data.getDataString());
+            }
+
+        } catch (Exception pE) {
+            Log.d(TAG, "onActivityResult: Exception" + pE.getMessage());
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case LocationPermission: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+                    }
+                } else {
+                    Toast.makeText(this, "permission denied",
+                            Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+        }
+
+    }
+
+    public void upload() {
+        if (filepath != null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setTitle("Uploading Image..");
+            mProgressDialog.show();
+            StorageReference sr = FirebaseStorage.getInstance().getReference();
+            Random rand = new Random();
+            COUNTER = rand.nextInt(1000000);
+            String imagePath = "images/" + Username + String.valueOf(COUNTER) + ".jpg";
+            COUNTER++;
+            final StorageReference imgpoint = sr.child(imagePath);
+            UploadTask uploadTask = imgpoint.putFile(filepath);
+            urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    } else {
+                        mProgressDialog.dismiss();
+                    }
+                    // Continue with the task to get the download URL
+                    return imgpoint.getDownloadUrl();
+                }
+            });
+        } else {
+            Toast.makeText(this, "Error No file selected", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    private void fetchLastLocation() {
+        checkLocationPermission();
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
@@ -204,10 +241,12 @@ public class OwnerAdd extends AppCompatActivity {
                             currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
                     lon = currentLocation.getLongitude();
                     lat = currentLocation.getLatitude();
+                    Toast.makeText(OwnerAdd.this, "location Successful.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
 
     public boolean internetIsConnected() {
         try {
@@ -247,7 +286,6 @@ public class OwnerAdd extends AppCompatActivity {
         map.put("Url", URLIMAGE);
         map.put("Latitude", Double.toString(lat));
         map.put("Longitude", Double.toString(lon));
-        if (!Double.toString(lat).equals(String.valueOf(0.0))){
             db.collection("hostellist").add(map).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
@@ -263,10 +301,7 @@ public class OwnerAdd extends AppCompatActivity {
                     map.clear();
                 }
             });
-        }else {
-            mProgressDialog.dismiss();
-            Toast.makeText(OwnerAdd.this, "We Need to Get your Location Click Record Hostel Location", Toast.LENGTH_LONG).show();
-        }
+
     }
 
     public void openImage() {
@@ -275,4 +310,48 @@ public class OwnerAdd extends AppCompatActivity {
         fileImage.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(fileImage, "Select an image"), rrq);
     }
+
+    public boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LocationPermission);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void OnGPS() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Enable GPS").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void getLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LocationPermission);
+        } else {
+            Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (locationGPS != null) {
+                lat = locationGPS.getLatitude();
+                lon = locationGPS.getLongitude();
+                Toast.makeText(this, "location found.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Unable to find location Check if GPS is On.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 }

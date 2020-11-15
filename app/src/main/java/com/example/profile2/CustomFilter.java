@@ -2,6 +2,8 @@ package com.example.profile2;
 
 import android.widget.Filter;
 
+import com.example.profile2.model.Entry;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -121,7 +121,7 @@ public class Register extends AppCompatActivity {
                             {
                                 progressDialog.dismiss();
                                 Toast.makeText(Register.this, "User Already registered", Toast.LENGTH_SHORT).show();
-                                Intent i=new Intent(Register.this,MainActivity.class);
+                                Intent i=new Intent(Register.this, SignInActivity.class);
                                 startActivity(i);
                                 finish();
                             }
@@ -132,13 +132,11 @@ public class Register extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
-//                                progressBar.setVisibility(View.GONE);
                                 String AA = "User";
                                 String ATYPE = spin.getSelectedItem().toString();
                                 if (ATYPE.equals("Hostel Owner")) {
                                     AA = "Owner";
                                 }
-//                                User user=new User(u,nn,pp,AA);
                                 Map<String, String> user = new HashMap<>();
                                 user.put("Name", nn);
                                 user.put("Username", u);
@@ -161,7 +159,7 @@ public class Register extends AppCompatActivity {
                                     }
                                 });
                                 progressDialog.dismiss();
-                                Intent intent = new Intent(Register.this, MainActivity.class);
+                                Intent intent = new Intent(Register.this, SignInActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
