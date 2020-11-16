@@ -319,12 +319,15 @@
                             android:textSize="21sp" />
                     </LinearLayout>
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_margin="20dp"
                         android:id="@+id/hostelOccupant"
-                        android:background="@drawable/buttonshape"
-                        android:backgroundTint="@color/colorPrimary"
+                        android:padding="10dp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
                         android:layout_height="wrap_content"
                         android:text="View Hostel Occupant"/>
 
@@ -340,11 +343,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:background="@drawable/buttonshape"
+                            android:background="@drawable/selector_xml_btn_yellow"
                             android:text="Phone:"
                             android:gravity="center"
                             android:layout_margin="10dp"
-                            android:padding="26dp"
+                            android:padding="15dp"
                             android:textColor="#ffffff" />
                     </LinearLayout>
 
@@ -361,10 +364,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:background="@drawable/buttonshape"
+                            android:background="@drawable/selector_xml_btn_yellow"
                             android:text="Find this address:"
                             android:gravity="center"
-                            android:padding="26dp"
+                            android:padding="15dp"
                             android:textColor="#ffffff" />
                     </LinearLayout>
 

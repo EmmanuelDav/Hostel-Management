@@ -2,6 +2,7 @@ package com.example.profile2;
 
 import android.widget.Filter;
 
+import com.example.profile2.Adapter.RecyclerViewAdaptor;
 import com.example.profile2.model.Entry;
 
 import java.util.ArrayList;
@@ -15,7 +16,6 @@ public class CustomFilter extends Filter {
         this.filterList= (ArrayList<Entry>) filterList;
         this.adaptor=recyclerViewAdaptor;
     }
-
 
     public ArrayList<Entry> getFilterList() {
         return filterList;
@@ -45,20 +45,16 @@ public class CustomFilter extends Filter {
                 if(filterList.get(i).getName().toUpperCase().contains(charSequence))
                 {
                     filterModels.add(filterList.get(i));
-
-
                 }
             }
             results.count=filterModels.size();
             results.values=filterModels;
-
         }
         else
         {
             results.count=filterList.size();
             results.values=filterList;
         }
-
             return null;
     }
 

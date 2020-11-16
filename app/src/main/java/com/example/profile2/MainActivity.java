@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +14,7 @@ import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.profile2.Adapter.RecyclerViewAdaptor;
 import com.example.profile2.model.Entry;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     RecyclerViewAdaptor mRecyclerViewAdaptor;
     FirebaseFirestore mFirebaseFirestore;
     List<Entry> mEntryList;
-    ArrayAdapter<String> Aadapter;
     ArrayList<String> ListOFHostels, flist;
 
     @Override
@@ -47,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerViewAdaptor = new RecyclerViewAdaptor(MainActivity.this, mEntryList);
-
         mFirebaseFirestore.collection("hostellist")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {

@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +27,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.profile2.HostelDialogFragment.AddHostelFragmentDialog;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.Continuation;
@@ -47,12 +46,9 @@ import java.util.Map;
 import java.util.Random;
 
 public class OwnerAdd extends AppCompatActivity {
-    ImageView imageH;
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
-    LocationListener locationListener;
     String Username;
-    private StorageReference storageReference;
     EditText hostelName, address, distance, rentPerPerson, rent;
     EditText phone;
     TextView SelectedImage;
@@ -69,6 +65,7 @@ public class OwnerAdd extends AppCompatActivity {
     private ProgressDialog mProgressDialog;
     private static final int LocationPermission = 124;
     private static final String TAG = OwnerAdd.class.getSimpleName();
+    public static String staticHostelName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,11 +120,6 @@ public class OwnerAdd extends AppCompatActivity {
                 String mDistance = distance.getText().toString();
                 String mRentPerPerson = rentPerPerson.getText().toString();
                 String mRent = rent.getText().toString();
-                String mHostelGender = hostelFor.getSelectedItem().toString();
-                String mNumOfBathroom = numOfBathrooms.getSelectedItem().toString();
-                String numfBeds = numOfBedrooms.getSelectedItem().toString();
-                String mNumOfPerson = numOfPerson.getSelectedItem().toString();
-                String mTypeOfRoom = typeOfRoom.getSelectedItem().toString();
                 String PHone = phone.getText().toString();
                 String mSelectedImage = SelectedImage.getText().toString();
                 boolean Px = true;
@@ -164,6 +156,11 @@ public class OwnerAdd extends AppCompatActivity {
                     }
                 }
             }
+        });
+        findViewById(R.id.addHostelOccupant).setOnClickListener(v -> {
+            staticHostelName = hostelName.getText().toString();
+            AddHostelFragmentDialog sAddHostelFragmentDialog = new AddHostelFragmentDialog();
+            sAddHostelFragmentDialog.show(getSupportFragmentManager(), "Fragment");
         });
     }
 

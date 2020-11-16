@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.example.profile2.HostelDialogFragment.ViewHostelOccupantDialog;
 import com.example.profile2.model.Entry;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -22,10 +23,8 @@ public class HostelDetails extends AppCompatActivity {
     int Pick = 234;
     ImageView imageH;
     private StorageReference storageReference;
-    TextView name, add, dist, rp, rt, hf, bed, nb, np, type;
+    TextView mHostelName, mHostelAddress, mHostelDistance, rentPerPerson, rentPerMonth, mHostelFor, mNumOfbed, mNumOfBathroom, nNumOfPersonOccupants, type;
     Button phone, Loc;
-
-
     private Uri filepath;
 
     @Override
@@ -33,9 +32,9 @@ public class HostelDetails extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Pick && data.getData() != null) {
             filepath = data.getData();
-
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,31 +45,31 @@ public class HostelDetails extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         imageH = findViewById(R.id.imageH);
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        name = findViewById(R.id.NameH);
-        add = findViewById(R.id.add);
-        dist = findViewById(R.id.dist);
-        rp = findViewById(R.id.rp);
-        rt = findViewById(R.id.rt);
-        hf = findViewById(R.id.hf);
-        nb = findViewById(R.id.nb);
-        bed = findViewById(R.id.bed);
-        np = findViewById(R.id.np);
+        mHostelName = findViewById(R.id.NameH);
+        mHostelAddress = findViewById(R.id.add);
+        mHostelDistance = findViewById(R.id.dist);
+        rentPerPerson = findViewById(R.id.rp);
+        rentPerMonth = findViewById(R.id.rt);
+        mHostelFor = findViewById(R.id.hf);
+        mNumOfBathroom = findViewById(R.id.nb);
+        mNumOfbed = findViewById(R.id.bed);
+        nNumOfPersonOccupants = findViewById(R.id.np);
         type = findViewById(R.id.type);
         phone = findViewById(R.id.phone);
         final Entry e;
         Intent i = getIntent();
         e = (Entry) i.getSerializableExtra("Entry");
-        name.setText(e.getName().toString());
-        add.setText(e.getAdd().toString());
+        mHostelName.setText(e.getName().toString());
+        mHostelAddress.setText(e.getAdd().toString());
         String z = e.getDistance().toString();
         Glide.with(getApplicationContext()).load(e.getUrl()).placeholder(R.drawable.splash).into(imageH);
-        dist.setText(z.substring(9));
-        rp.setText(e.getRp().toString());
-        rt.setText(e.getRt().toString());
-        hf.setText(e.getHf().toString());
-        nb.setText(e.getNb().toString());
-        bed.setText(e.getBed().toString());
-        np.setText(e.getNp().toString());
+        mHostelDistance.setText(z.substring(9));
+        rentPerPerson.setText(e.getRp().toString());
+        rentPerMonth.setText(e.getRt().toString());
+        mHostelFor.setText(e.getHf().toString());
+        mNumOfBathroom.setText(e.getNb().toString());
+        mNumOfbed.setText(e.getBed().toString());
+        nNumOfPersonOccupants.setText(e.getNp().toString());
         type.setText(e.getType().toString());
         phone.setText(e.getPhone().toString());
         Loc.setOnClickListener(new View.OnClickListener() {
@@ -96,10 +95,11 @@ public class HostelDetails extends AppCompatActivity {
             }
         });
         findViewById(R.id.hostelOccupant).setOnClickListener(view ->{
-            DialogFragment sDialogFragment = new DialogFragment();
+            Bundle sBundle = new Bundle();
+            sBundle.putString("Hostel name",e.getName());
+            ViewHostelOccupantDialog sDialogFragment = new ViewHostelOccupantDialog();
+            sDialogFragment.setArguments(sBundle);
             sDialogFragment.show(getSupportFragmentManager(),"Fragment");
         });
-
     }
-
 }

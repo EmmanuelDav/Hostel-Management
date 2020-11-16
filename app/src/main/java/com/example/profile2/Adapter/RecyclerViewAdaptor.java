@@ -1,4 +1,4 @@
-package com.example.profile2;
+package com.example.profile2.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +16,9 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.profile2.CustomFilter;
+import com.example.profile2.HostelDetails;
+import com.example.profile2.R;
 import com.example.profile2.model.Entry;
 import com.squareup.picasso.Picasso;
 
@@ -94,39 +97,6 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
         }
         return filter;
     }
-
-//    @Override
-//
-//    private Filter exfilter=new Filter() {
-//        @Override
-//        protected FilterResults performFiltering(CharSequence charSequence) {
-//            List<Entry> flist=new ArrayList<>();
-//            if(charSequence==null || charSequence.length()==0)
-//            {
-//                flist.addAll(entryList);
-//            }else
-//            {
-//                String fPattern=charSequence.toString().toLowerCase().trim();
-//                for(Entry item:entryList)
-//                {
-//                    if(item.getName().toLowerCase().contains(fPattern)){
-//                        flist.add(item);
-//                    }
-//                }
-//            }
-//            FilterResults results=new FilterResults();
-//            results.values=flist;
-//            return results;
-//        }
-//
-//        @Override
-//        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-//            entryList.clear();
-//            entryList.addAll((List)filterResults.values);
-//            notifyDataSetChanged();
-//            changenow();
-//        }
-//    };
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;

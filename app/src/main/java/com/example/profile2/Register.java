@@ -83,11 +83,13 @@ public class Register extends AppCompatActivity {
 //                    Intent i=new Intent(Register.this,MainActivity.class);
 //                    startActivity(i);
                     ph.setError("Phone Number cannot be empty");
+                    progressDialog.dismiss();
                 }
                 if(nn.length()==0 )
                 {
 //                    Toast.makeText(Register.this, "Name cannot be empty", Toast.LENGTH_SHORT).show();
                     name.setError("Name cannot be empty");
+                    progressDialog.dismiss();
 //
                 }
 
@@ -97,6 +99,7 @@ public class Register extends AppCompatActivity {
 //                    Intent i=new Intent(Register.this,MainActivity.class);
 //                    startActivity(i);
                     mail.setError("Email cannot be empty");
+                    progressDialog.dismiss();
                 }
                 if(p.length()==0 || rp.length()==0)
                 {
@@ -104,10 +107,12 @@ public class Register extends AppCompatActivity {
 //                    Intent i=new Intent(Register.this,MainActivity.class);
 //                    startActivity(i);
                     pass.setError("Password cannot be empty");
+                    progressDialog.dismiss();
                 }
                 if(!(p.equals(rp)))
                 {
                     Toast.makeText(Register.this, "Passwords don't match", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
                 else if(p.length()!=0 && e.length()!=0 && nn.length()!=0 && phh.length()==10)
                 {
