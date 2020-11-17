@@ -3,6 +3,8 @@ package com.example.profile2;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -12,6 +14,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -24,7 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 222;
     private GoogleMap mMap;
@@ -50,13 +53,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     lat = Double.parseDouble(doc.getString("Latitude"));
                     lon = Double.parseDouble(doc.getString("Longitude"));
                     Log.e("Lat Lon", lat + " " + lon + "");
-                    LatLng latLng = new LatLng(21, 48);
+                    LatLng latLng = new LatLng(lat, lon);
                     MarkerOptions markerOptions = new MarkerOptions()
                             .position(latLng)
                             .title("Hostel Location");
                     mMap.addMarker(new MarkerOptions().position(latLng).title("Hostel Location"));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
                     mMap.addMarker(markerOptions);
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                     break;
@@ -88,9 +89,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
-//                        if (mGoogleApiClient == null) {
-//                            buildGoogleApiClient();
-//                        }
+
                         mMap.setMyLocationEnabled(true);
                     }
                 } else {
@@ -100,5 +99,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return;
             }
         }
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull Location pLocation) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(@NonNull String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(@NonNull String provider) {
+
     }
 }

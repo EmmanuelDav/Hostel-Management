@@ -8,6 +8,7 @@
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:backgroundTint="@color/grey"
         android:layout_margin="10dp">
 
         <RelativeLayout
@@ -18,11 +19,11 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profilePic"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_house" />
+                android:src="@drawable/ic_baseline_person_24" />
 
             <TextView
                 android:id="@+id/name"

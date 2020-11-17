@@ -50,10 +50,9 @@ public class AddHostelActivity extends AppCompatActivity {
     Spinner hostelFor, numOfBathrooms, numOfBedrooms, typeOfRoom, numOfPerson;
     EditText hostelName, address, distance, rentPerPerson, rent;
     Button submitButton, selectImage, RecordLocation;
-    String Username;
+    String Username,URLIMAGE;
     EditText phone;
     TextView SelectedImage;
-    String URLIMAGE;
     int rrq = 123;
     Location currentLocation;
     static int COUNTER = 0;
@@ -78,17 +77,6 @@ public class AddHostelActivity extends AppCompatActivity {
         lat = 0.0;
         lon = 0.0;
         RecordLocation = findViewById(R.id.LOcation);
-        RecordLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) && !locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-                    OnGPS();
-                } else {
-                    getLocation();
-                    fetchLastLocation();
-                }
-            }
-        });
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Username = (String) it.getSerializableExtra("Username");
@@ -160,6 +148,17 @@ public class AddHostelActivity extends AppCompatActivity {
             AddHostelFragmentDialog sAddHostelFragmentDialog = new AddHostelFragmentDialog();
             sAddHostelFragmentDialog.show(getSupportFragmentManager(), "Fragment");
         });
+        RecordLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) && !locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                    OnGPS();
+                } else {
+                    fetchLastLocation();
+                }
+            }
+        });
+
     }
 
     @Override
@@ -328,22 +327,5 @@ public class AddHostelActivity extends AppCompatActivity {
         });
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
-    }
-
-    private void getLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LocationPermission);
-        } else {
-            Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (locationGPS != null) {
-                lat = locationGPS.getLatitude();
-                lon = locationGPS.getLongitude();
-                Toast.makeText(this, "location found.", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Unable to find location Check if GPS is On.", Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 }

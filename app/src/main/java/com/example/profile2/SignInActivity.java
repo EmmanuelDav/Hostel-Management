@@ -39,12 +39,6 @@ public class SignInActivity extends AppCompatActivity {
     FirebaseUser mFirebaseUser;
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
