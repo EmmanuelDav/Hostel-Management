@@ -45,17 +45,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class OwnerAdd extends AppCompatActivity {
-    Location currentLocation;
+public class AddHostelActivity extends AppCompatActivity {
     FusedLocationProviderClient fusedLocationProviderClient;
-    String Username;
+    Spinner hostelFor, numOfBathrooms, numOfBedrooms, typeOfRoom, numOfPerson;
     EditText hostelName, address, distance, rentPerPerson, rent;
+    Button submitButton, selectImage, RecordLocation;
+    String Username;
     EditText phone;
     TextView SelectedImage;
-    Spinner hostelFor, numOfBathrooms, numOfBedrooms, typeOfRoom, numOfPerson;
-    Button submitButton, selectImage, LOC, RecordLocation;
     String URLIMAGE;
     int rrq = 123;
+    Location currentLocation;
     static int COUNTER = 0;
     LocationManager locationManager;
     Task<Uri> urlTask;
@@ -64,7 +64,7 @@ public class OwnerAdd extends AppCompatActivity {
     Map<String, String> map;
     private ProgressDialog mProgressDialog;
     private static final int LocationPermission = 124;
-    private static final String TAG = OwnerAdd.class.getSimpleName();
+    private static final String TAG = AddHostelActivity.class.getSimpleName();
     public static String staticHostelName;
 
     @Override
@@ -124,14 +124,13 @@ public class OwnerAdd extends AppCompatActivity {
                 String mSelectedImage = SelectedImage.getText().toString();
                 boolean Px = true;
                 if (PHone.length() != 10) {
-                    Toast.makeText(OwnerAdd.this, "Phone number should be 10 digits", Toast.LENGTH_SHORT).show();
-                } else if (name.isEmpty() || mAddress.isEmpty() || mDistance.isEmpty() || mRentPerPerson.isEmpty()
-                        || mRent.isEmpty() || mSelectedImage.equals("no image selected")) {
-                    Toast.makeText(OwnerAdd.this, "All fields Must be filled especially The record Location ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddHostelActivity.this, "Phone number should be 10 digits", Toast.LENGTH_SHORT).show();
+                } else if (name.isEmpty() || mAddress.isEmpty() || mDistance.isEmpty() || mRentPerPerson.isEmpty() || mRent.isEmpty() || mSelectedImage.equals("no image selected")) {
+                    Toast.makeText(AddHostelActivity.this, "All fields Must be filled especially The record Location ", Toast.LENGTH_LONG).show();
                 } else {
                     if (!internetIsConnected()) {
                         Px = false;
-                        Toast.makeText(OwnerAdd.this, "Internet Not available", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddHostelActivity.this, "Internet Not available", Toast.LENGTH_SHORT).show();
                     } else {
                         upload();
                     }
@@ -143,15 +142,14 @@ public class OwnerAdd extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         Uri downloadUri = task.getResult();
                                         URLIMAGE = downloadUri.toString();
-                                        // Toast.makeText(OwnerAdd.this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
                                         submitData();
                                     } else {
-                                        Toast.makeText(OwnerAdd.this, "Image Uploaded Failed", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AddHostelActivity.this, "Image Uploaded Failed", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
                         } else {
-                            Toast.makeText(OwnerAdd.this, "No Image Selected", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddHostelActivity.this, "No Image Selected", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -172,7 +170,6 @@ public class OwnerAdd extends AppCompatActivity {
                 filepath = data.getData();
                 SelectedImage.setText(data.getDataString());
             }
-
         } catch (Exception pE) {
             Log.d(TAG, "onActivityResult: Exception" + pE.getMessage());
         }
@@ -216,7 +213,6 @@ public class OwnerAdd extends AppCompatActivity {
                     } else {
                         mProgressDialog.dismiss();
                     }
-                    // Continue with the task to get the download URL
                     return imgpoint.getDownloadUrl();
                 }
             });
@@ -234,11 +230,11 @@ public class OwnerAdd extends AppCompatActivity {
             public void onSuccess(Location location) {
                 if (location != null) {
                     currentLocation = location;
-                    Toast.makeText(OwnerAdd.this, currentLocation.getLatitude() + " " +
+                    Toast.makeText(AddHostelActivity.this, currentLocation.getLatitude() + " " +
                             currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
                     lon = currentLocation.getLongitude();
                     lat = currentLocation.getLatitude();
-                    Toast.makeText(OwnerAdd.this, "location Successful.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddHostelActivity.this, "location Successful.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -286,15 +282,15 @@ public class OwnerAdd extends AppCompatActivity {
             db.collection("hostellist").add(map).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
-                    Toast.makeText(OwnerAdd.this, "Hostel Added Successfully", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(OwnerAdd.this, Owner.class);
+                    Toast.makeText(AddHostelActivity.this, "Hostel Added Successfully", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(AddHostelActivity.this, Owner.class);
                     startActivity(i);
                     finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(OwnerAdd.this, "Some Error Occurred", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddHostelActivity.this, "Some Error Occurred", Toast.LENGTH_SHORT).show();
                     map.clear();
                 }
             });
@@ -350,5 +346,4 @@ public class OwnerAdd extends AppCompatActivity {
             }
         }
     }
-
 }

@@ -1,11 +1,12 @@
 package com.example.profile2;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -23,7 +24,7 @@ public class Owner extends AppCompatActivity {
         addHostel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Owner.this, OwnerAdd.class);
+                Intent intent = new Intent(Owner.this, AddHostelActivity.class);
                 intent.putExtra("Username", (String) Username);
                 startActivity(intent);
             }
@@ -40,3 +41,4 @@ public class Owner extends AppCompatActivity {
         });
     }
 }
+

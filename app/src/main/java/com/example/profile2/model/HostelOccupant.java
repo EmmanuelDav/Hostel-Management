@@ -4,10 +4,10 @@ public class HostelOccupant {
     String name;
     String department;
     String level;
-    int picture;
+    String picture;
     String phoneNum;
 
-    public HostelOccupant(String pName, String pDepartment, String pLevel, int pPicture,String pPhoneNum) {
+    public HostelOccupant(String pName, String pDepartment, String pLevel, String pPicture, String pPhoneNum) {
         name = pName;
         department = pDepartment;
         level = pLevel;
@@ -27,7 +27,7 @@ public class HostelOccupant {
         return level;
     }
 
-    public int getPicture() {
+    public String getPicture() {
         return picture;
     }
 

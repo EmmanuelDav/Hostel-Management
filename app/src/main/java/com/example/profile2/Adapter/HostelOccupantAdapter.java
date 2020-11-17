@@ -40,9 +40,8 @@ public class HostelOccupantAdapter extends RecyclerView.Adapter<HostelOccupantAd
         holder.ph.setText("Phone Number : "+ e.getPhoneNum());
         holder.name.setText("Name : "+e.getName());
         Picasso.get().load(e.getPicture()).placeholder(R.drawable.ic_house).into(holder.image);
+
     }
-
-
 
     @Override
     public int getItemCount() {

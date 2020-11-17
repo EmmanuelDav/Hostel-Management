@@ -319,17 +319,11 @@
                             android:textSize="21sp" />
                     </LinearLayout>
 
-                    <TextView
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/hostelOccupantR"
                         android:layout_width="match_parent"
-                        android:layout_margin="20dp"
-                        android:id="@+id/hostelOccupant"
-                        android:padding="10dp"
-                        android:textColor="@color/black"
-                        android:gravity="center_horizontal"
-                        android:textStyle="bold"
-                        android:textSize="20dp"
                         android:layout_height="wrap_content"
-                        android:text="View Hostel Occupant"/>
+                        tools:listitem="@layout/hostel_occupant"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"

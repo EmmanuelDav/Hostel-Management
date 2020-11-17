@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -27,36 +28,33 @@ import java.util.List;
 
 
 public class SignInActivity extends AppCompatActivity {
-
     private static final String TAG = SignInActivity.class.getSimpleName();
     private EditText emailEditText;
     private EditText passEditText;
     TextView newUserSignIn;
     Button signIn;
-    FirebaseAuth fb;
+    FirebaseAuth mFirebaseAuth;
     AlertDialog.Builder builder;
     AlertDialog progressDialog;
+    FirebaseUser mFirebaseUser;
 
     @Override
     protected void onStart() {
         super.onStart();
-        if (fb.getCurrentUser() != null) {
-
-        }
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        fb = FirebaseAuth.getInstance();
+        mFirebaseAuth = FirebaseAuth.getInstance();
         progressDialog = getDialogProgressBar().create();
         progressDialog.setCanceledOnTouchOutside(false);
         newUserSignIn = (TextView) findViewById(R.id.register);
         signIn = findViewById(R.id.button);
         emailEditText = findViewById(R.id.mail);
         passEditText = findViewById(R.id.password);
-
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,17 +62,17 @@ public class SignInActivity extends AppCompatActivity {
                 final String email, password;
                 email = emailEditText.getText().toString().trim();
                 password = passEditText.getText().toString().trim();
-                final FirebaseFirestore db = FirebaseFirestore.getInstance();
+                final FirebaseFirestore sFirebaseFirestore = FirebaseFirestore.getInstance();
                 if (email.length() == 0 || password.length() == 0) {
                     progressDialog.dismiss();
                     Toast.makeText(SignInActivity.this, "Login fields cannot be empty", Toast.LENGTH_SHORT).show();
                 } else {
-                    fb.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    mFirebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(SignInActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                db.collection("Users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                sFirebaseFirestore.collection("Users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                     @Override
                                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                         List<DocumentSnapshot> li;
@@ -96,7 +94,6 @@ public class SignInActivity extends AppCompatActivity {
                                                 Intent i1 = new Intent(SignInActivity.this, MainActivity.class);
                                                 startActivity(i1);
                                             } else {
-
                                                 Intent i = new Intent(SignInActivity.this, Owner.class);
                                                 i.putExtra("Username", email);
                                                 startActivity(i);
@@ -109,7 +106,6 @@ public class SignInActivity extends AppCompatActivity {
                             } else {
                                 progressDialog.dismiss();
                                 Toast.makeText(SignInActivity.this, "Login Unsuccessful", Toast.LENGTH_SHORT).show();
-                              //  Log.d(TAG,"Login Failed because "+task.getResult().toString());
                             }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -118,7 +114,6 @@ public class SignInActivity extends AppCompatActivity {
                             Log.d(TAG,"Login Failed because "+pE.getMessage());
                         }
                     });
-
                 }
             }
         });
@@ -140,5 +135,4 @@ public class SignInActivity extends AppCompatActivity {
         }
         return builder;
     }
-
 }

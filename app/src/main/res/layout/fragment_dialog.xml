@@ -5,10 +5,5 @@
     android:layout_height="wrap_content"
     tools:context=".HostelDialogFragment.ViewHostelOccupantDialog">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/hostelOccupantR"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/hostel_occupant"/>
 
 </RelativeLayout>
