@@ -1,4 +1,4 @@
-package com.example.profile2.model;
+package com.example.profile2_Admin.model;
 
 public class HostelOccupant {
     String name;

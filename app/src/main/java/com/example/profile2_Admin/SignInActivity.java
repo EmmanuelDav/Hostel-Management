@@ -1,4 +1,4 @@
-package com.example.profile2;
+package com.example.profile2_Admin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +19,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -36,7 +35,6 @@ public class SignInActivity extends AppCompatActivity {
     FirebaseAuth mFirebaseAuth;
     AlertDialog.Builder builder;
     AlertDialog progressDialog;
-    FirebaseUser mFirebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +82,7 @@ public class SignInActivity extends AppCompatActivity {
                                             }
                                             progressDialog.dismiss();
                                             if (x == 0) {
-                                                Toast.makeText(SignInActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                                Intent i1 = new Intent(SignInActivity.this, MainActivity.class);
-                                                startActivity(i1);
+                                                Toast.makeText(SignInActivity.this, "This App is For Hostel Admin Only Students Are not Allowed", Toast.LENGTH_LONG).show();
                                             } else {
                                                 Toast.makeText(SignInActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                                 Intent i = new Intent(SignInActivity.this, Owner.class);
@@ -97,7 +93,6 @@ public class SignInActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
-
                             } else {
                                 progressDialog.dismiss();
                                 Toast.makeText(SignInActivity.this, "Failed Low OR No Internet Connection", Toast.LENGTH_LONG).show();

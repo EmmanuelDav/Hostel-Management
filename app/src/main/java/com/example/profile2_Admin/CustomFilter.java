@@ -1,9 +1,9 @@
-package com.example.profile2;
+package com.example.profile2_Admin;
 
 import android.widget.Filter;
 
-import com.example.profile2.Adapter.RecyclerViewAdaptor;
-import com.example.profile2.model.Entry;
+import com.example.profile2_Admin.Adapter.RecyclerViewAdaptor;
+import com.example.profile2_Admin.model.Entry;
 
 import java.util.ArrayList;
 import java.util.List;

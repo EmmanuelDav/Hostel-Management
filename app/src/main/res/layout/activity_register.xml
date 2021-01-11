@@ -23,7 +23,7 @@
         android:fontFamily="@font/gotham"
         android:gravity="center"
         android:shadowColor="#57000000"
-        android:text="Register"
+        android:text="Register Hostel Admin"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="28sp"

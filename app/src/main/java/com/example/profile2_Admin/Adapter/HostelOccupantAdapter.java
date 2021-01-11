@@ -1,4 +1,4 @@
-package com.example.profile2.Adapter;
+package com.example.profile2_Admin.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.profile2.R;
-import com.example.profile2.model.HostelOccupant;
+import com.example.profile2_Admin.R;
+import com.example.profile2_Admin.model.HostelOccupant;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

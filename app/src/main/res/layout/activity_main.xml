@@ -24,11 +24,19 @@
         android:layout_alignParentBottom="true"
         android:padding="40dp">
 
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="App Only For Hostel Admin"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
         <ImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:src="@drawable/ic_house">
 
         </ImageView>
@@ -100,7 +108,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
             android:fontFamily="@font/gotham"
-            android:text="New User Signup?"
+            android:text="New Admin SignUp?"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#000" />
 

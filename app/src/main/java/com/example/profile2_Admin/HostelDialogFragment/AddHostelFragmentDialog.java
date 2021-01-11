@@ -1,4 +1,4 @@
-package com.example.profile2.HostelDialogFragment;
+package com.example.profile2_Admin.HostelDialogFragment;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -20,8 +20,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.profile2.AddHostelActivity;
-import com.example.profile2.R;
+import com.example.profile2_Admin.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,7 +33,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.Random;
 
-import static com.example.profile2.AddHostelActivity.staticHostelName;
+import static com.example.profile2_Admin.AddHostelActivity.staticHostelName;
 
 public class AddHostelFragmentDialog extends DialogFragment {
     private static final String TAG = AddHostelFragmentDialog.class.getSimpleName();

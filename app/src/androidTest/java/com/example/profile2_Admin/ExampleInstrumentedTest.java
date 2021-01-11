@@ -1,4 +1,4 @@
-package com.example.profile2;
+package com.example.profile2_Admin;
 
 import android.content.Context;
 

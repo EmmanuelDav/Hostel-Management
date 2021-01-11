@@ -1,38 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Owner"
     android:background="@drawable/loginbg"
+    android:gravity="center"
     android:orientation="vertical"
-    android:gravity="center">
+    tools:context=".Owner">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Hostel"
-            android:id="@+id/AddHostel"
-            android:layout_gravity="center"
-            android:padding="10dp"
-            android:textColor="#ffffff"
-            android:gravity="center"
-            android:background="@drawable/selector_xml_btn_yellow"
-            android:layout_margin="20dp"
-            />
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Don't Forget To Visit Hostel Users App To View  Newly Added Hostels"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/AddHostel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Signout"
-        android:padding="10dp"
-        android:id="@+id/Signout"
-        android:textColor="#ffffff"
-        android:layout_margin="20dp"
         android:layout_gravity="center"
+        android:layout_margin="20dp"
         android:background="@drawable/selector_xml_btn_yellow"
         android:gravity="center"
-        />
+        android:padding="10dp"
+        android:text="Add Hostel"
+        android:textColor="#ffffff" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/Signout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:background="@drawable/selector_xml_btn_yellow"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Signout"
+        android:textColor="#ffffff" />
 
 </LinearLayout>

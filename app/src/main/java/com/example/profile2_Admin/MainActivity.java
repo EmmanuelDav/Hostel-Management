@@ -1,4 +1,4 @@
-package com.example.profile2;
+package com.example.profile2_Admin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,8 +14,8 @@ import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.profile2.Adapter.RecyclerViewAdaptor;
-import com.example.profile2.model.Entry;
+import com.example.profile2_Admin.Adapter.RecyclerViewAdaptor;
+import com.example.profile2_Admin.model.Entry;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;

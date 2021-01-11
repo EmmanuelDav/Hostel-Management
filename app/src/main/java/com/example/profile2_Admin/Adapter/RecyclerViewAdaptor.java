@@ -1,4 +1,4 @@
-package com.example.profile2.Adapter;
+package com.example.profile2_Admin.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,10 +16,10 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.profile2.CustomFilter;
-import com.example.profile2.HostelDetails;
-import com.example.profile2.R;
-import com.example.profile2.model.Entry;
+import com.example.profile2_Admin.CustomFilter;
+import com.example.profile2_Admin.HostelDetails;
+import com.example.profile2_Admin.R;
+import com.example.profile2_Admin.model.Entry;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
