@@ -111,7 +111,7 @@ public class AddHostelActivity extends AppCompatActivity {
                 String PHone = phone.getText().toString();
                 String mSelectedImage = SelectedImage.getText().toString();
                 boolean Px = true;
-                if (PHone.length() != 10) {
+                if (PHone.length() != 11) {
                     Toast.makeText(AddHostelActivity.this, "Phone number should be 10 digits", Toast.LENGTH_SHORT).show();
                 } else if (name.isEmpty() || mAddress.isEmpty() || mDistance.isEmpty() || mRentPerPerson.isEmpty() || mRent.isEmpty() || mSelectedImage.equals("no image selected")) {
                     Toast.makeText(AddHostelActivity.this, "All fields Must be filled especially The record Location ", Toast.LENGTH_LONG).show();

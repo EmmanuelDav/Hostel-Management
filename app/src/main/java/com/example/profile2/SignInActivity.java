@@ -88,11 +88,7 @@ public class SignInActivity extends AppCompatActivity {
                                                 Intent i1 = new Intent(SignInActivity.this, MainActivity.class);
                                                 startActivity(i1);
                                             } else {
-                                                Toast.makeText(SignInActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                                Intent i = new Intent(SignInActivity.this, Owner.class);
-                                                i.putExtra("Username", email);
-                                                startActivity(i);
-                                                finish();
+                                                Toast.makeText(SignInActivity.this, "You are an Admin You Need to Create A User Account", Toast.LENGTH_LONG).show();
                                             }
                                         }
                                     }
