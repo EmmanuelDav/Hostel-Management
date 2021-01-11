@@ -47,11 +47,8 @@ public class AddHostelFragmentDialog extends DialogFragment {
     private ProgressDialog mProgressDialog;
     AlertDialog.Builder builder;
     Task<Uri> urlTask;
-    private static int rrq = 111;
-
-    public AddHostelFragmentDialog() {
-    }
-
+    private static final int rrq = 111;
+    public AddHostelFragmentDialog(){}
     int mInt = 0;
     Uri filepath;
 
@@ -167,7 +164,7 @@ public class AddHostelFragmentDialog extends DialogFragment {
     public void upload() {
         if (filepath != null) {
             mProgressDialog = new ProgressDialog(getContext());
-            mProgressDialog.setTitle("Uploading Image..");
+            mProgressDialog.setTitle("Uploading Image...");
             mProgressDialog.show();
             StorageReference sr = FirebaseStorage.getInstance().getReference();
             Random rand = new Random();
@@ -188,7 +185,7 @@ public class AddHostelFragmentDialog extends DialogFragment {
                 }
             });
         } else {
-            Toast.makeText(getContext(), "Error No file selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Error Please Provide the Persons Picture", Toast.LENGTH_LONG).show();
         }
     }
 

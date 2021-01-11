@@ -65,7 +65,6 @@ public class SignInActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(SignInActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                 sFirebaseFirestore.collection("Users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                     @Override
                                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -85,9 +84,11 @@ public class SignInActivity extends AppCompatActivity {
                                             }
                                             progressDialog.dismiss();
                                             if (x == 0) {
+                                                Toast.makeText(SignInActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                                 Intent i1 = new Intent(SignInActivity.this, MainActivity.class);
                                                 startActivity(i1);
                                             } else {
+                                                Toast.makeText(SignInActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                                 Intent i = new Intent(SignInActivity.this, Owner.class);
                                                 i.putExtra("Username", email);
                                                 startActivity(i);
@@ -99,12 +100,14 @@ public class SignInActivity extends AppCompatActivity {
 
                             } else {
                                 progressDialog.dismiss();
-                                Toast.makeText(SignInActivity.this, "Login Unsuccessful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignInActivity.this, "Failed Low OR No Internet Connection", Toast.LENGTH_LONG).show();
                             }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception pE) {
+                            progressDialog.dismiss();
+                            Toast.makeText(SignInActivity.this, "Failed Low OR No Internet Connection", Toast.LENGTH_SHORT).show();
                             Log.d(TAG,"Login Failed because "+pE.getMessage());
                         }
                     });
@@ -118,8 +121,6 @@ public class SignInActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        emailEditText = (EditText) findViewById(R.id.mail);
-        passEditText = (EditText) findViewById(R.id.password);
     }
 
     public AlertDialog.Builder getDialogProgressBar() {

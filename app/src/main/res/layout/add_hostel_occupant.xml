@@ -21,7 +21,15 @@
                 android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_house" />
+                android:src="@drawable/ic_baseline_person_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Click on the Image to select A profile Picture"
+                android:layout_gravity="center_horizontal"/>
 
 
             <com.google.android.material.textfield.TextInputLayout
