@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.profile2_Admin">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.example.profile2_Admin.SplashScreen">
+        <activity android:name=".AcademicCoursesActivity"></activity>
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,24 +26,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.profile2_Admin.MapsActivity"
-            android:label="@string/title_activity_maps"/>
-        <activity android:name="com.example.profile2_Admin.Owner" />
-        <activity android:name="com.example.profile2_Admin.AddHostelActivity" />
-        <activity android:name="com.example.profile2_Admin.HostelDetails" />
-        <activity android:name="com.example.profile2_Admin.MainActivity" />
-        <activity android:name="com.example.profile2_Admin.Register" />
-        <activity android:name="com.example.profile2_Admin.SignInActivity">
-        </activity>
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".Owner" />
+        <activity android:name=".AddHostelActivity" />
+        <activity android:name=".HostelDetails" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Register" />
+        <activity android:name=".SignInActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
     </application>
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>
