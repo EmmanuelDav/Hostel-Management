@@ -16,17 +16,36 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.profile2_Admin.Adapter.HostelOccupantAdapter;
+import com.example.profile2_Admin.model.HostelOccupant;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Owner extends AppCompatActivity {
     Button SignOut;
     String Username;
     CardView addHostel;
     FirebaseAuth mAuth;
+    HostelOccupantAdapter mHostelOccupantAdapter;
+    ArrayList<HostelOccupant> sHostelOccupants;
+    FirebaseFirestore mFirebaseFirestore;
+    RecyclerView recyclerView;
+    CardView aadminstration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +53,10 @@ public class Owner extends AppCompatActivity {
         setContentView(R.layout.activity_owner);
         addHostel = findViewById(R.id.AddHostel);
         mAuth = FirebaseAuth.getInstance();
+        sHostelOccupants = new ArrayList<>();
+        recyclerView = findViewById(R.id.studentRecyclerView);
+        aadminstration = findViewById(R.id.adminstration);
+        mFirebaseFirestore = FirebaseFirestore.getInstance();
         Intent i = getIntent();
         Username = (String) i.getSerializableExtra("Username");
         addHostel.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +80,11 @@ public class Owner extends AppCompatActivity {
         findViewById(R.id.AcademicCourses).setOnClickListener(view ->{
             startActivity(new Intent(Owner.this, AcademicCoursesActivity.class));
         });
+        aadminstration.setOnClickListener(view ->{
+            startActivity(new Intent(Owner.this, StudentActivity.class));
+        });
+
+showRecoverPasswordDialog();
     }
 
     private void showRecoverPasswordDialog() {
@@ -125,6 +153,11 @@ public class Owner extends AppCompatActivity {
                 Toast.makeText(Owner.this,"Error Failed",Toast.LENGTH_LONG).show();
             }
         });
+    }
+    void loadDate(){
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        mHostelOccupantAdapter = new HostelOccupantAdapter(this, sHostelOccupants);
     }
 }
 

@@ -28,8 +28,6 @@ public class Entry implements Serializable, Comparable<Entry> {
         this.url = u;
         this.lat = la;
         this.lon = lo;
-
-
     }
 
     public void setUrl(String u) {

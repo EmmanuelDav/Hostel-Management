@@ -93,26 +93,23 @@ public class HostelDetails extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         mHostelOccupantAdapter = new HostelOccupantAdapter(this, sHostelOccupants);
-        mFirebaseFirestore.collection("HostelOccupant").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot pQueryDocumentSnapshots) {
-                List<DocumentSnapshot> li;
-                li = pQueryDocumentSnapshots.getDocuments();
-                if (!pQueryDocumentSnapshots.isEmpty()) {
-                    String n = "", p = "", r = "", d = "",u= "";
-                    for (DocumentSnapshot i : li) {
-                        if (i.exists()) {
-                            String hsname =(String) i.get("hostel name");
-                            if (e.getName().equals(hsname)){
-                                n = (String) i.get("name");
-                                r = (String) i.get("level");
-                                d = (String) i.get("department");
-                                p = (String) i.get("phoneNum");
-                                u = (String) i.get("Url");
-                                HostelOccupant sHostelOccupant = new HostelOccupant(n, d, r, u, p);
-                                sHostelOccupants.add(sHostelOccupant);
-                                recyclerView.setAdapter(mHostelOccupantAdapter);
-                            }
+        mFirebaseFirestore.collection("HostelOccupant").get().addOnSuccessListener(pQueryDocumentSnapshots -> {
+            List<DocumentSnapshot> li;
+            li = pQueryDocumentSnapshots.getDocuments();
+            if (!pQueryDocumentSnapshots.isEmpty()) {
+                String n = "", p = "", r = "", d = "",u= "";
+                for (DocumentSnapshot i1 : li) {
+                    if (i1.exists()) {
+                        String hsname =(String) i1.get("hostel name");
+                        if (e.getName().equals(hsname)){
+                            n = (String) i1.get("name");
+                            r = (String) i1.get("level");
+                            d = (String) i1.get("department");
+                            p = (String) i1.get("phoneNum");
+                            u = (String) i1.get("Url");
+                            HostelOccupant sHostelOccupant = new HostelOccupant(n, d, r, u, p);
+                            sHostelOccupants.add(sHostelOccupant);
+                            recyclerView.setAdapter(mHostelOccupantAdapter);
                         }
                     }
                 }

@@ -6,13 +6,27 @@ public class HostelOccupant {
     String level;
     String picture;
     String phoneNum;
+    String Gender;
+    String DateOfBirth;
+    String StateOfOrigin;
 
-    public HostelOccupant(String pName, String pDepartment, String pLevel, String pPicture, String pPhoneNum) {
-        name = pName;
-        department = pDepartment;
-        level = pLevel;
-        picture = pPicture;
-        phoneNum = pPhoneNum;
+    public HostelOccupant(String name, String department, String level, String picture, String phoneNum, String gender, String dateOfBirth, String stateOfOrigin) {
+        this.name = name;
+        this.department = department;
+        this.level = level;
+        this.picture = picture;
+        this.phoneNum = phoneNum;
+        Gender = gender;
+        DateOfBirth = dateOfBirth;
+        StateOfOrigin = stateOfOrigin;
+    }
+
+    public HostelOccupant(String n, String d, String r, String u, String p) {
+        this.name = n;
+        this.department = d;
+        this.level = r;
+        this.picture = u;
+        this.phoneNum = p;
     }
 
     public String getName() {
@@ -33,5 +47,17 @@ public class HostelOccupant {
 
     public String getPhoneNum() {
         return phoneNum;
+    }
+
+    public String getGender() {
+        return Gender;
+    }
+
+    public String getDateOfBirth() {
+        return DateOfBirth;
+    }
+
+    public String getStateOfOrigin() {
+        return StateOfOrigin;
     }
 }
