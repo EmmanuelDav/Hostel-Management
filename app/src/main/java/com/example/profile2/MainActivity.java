@@ -1,22 +1,36 @@
 package com.example.profile2;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.profile2.Adapter.RecyclerViewAdaptor;
 import com.example.profile2.model.Entry;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore mFirebaseFirestore;
     List<Entry> mEntryList;
     ArrayList<String> ListOFHostels, flist;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,48 +57,46 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mEntryList = new ArrayList<>();
+        mAuth = FirebaseAuth.getInstance();
         recyclerView = (RecyclerView) findViewById(R.id.home);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerViewAdaptor = new RecyclerViewAdaptor(MainActivity.this, mEntryList);
         mFirebaseFirestore.collection("hostellist")
                 .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        List<DocumentSnapshot> li;
-                        li = queryDocumentSnapshots.getDocuments();
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            String n = "", p = "", r = "", d = "";
-                            String add, hf, nb, np, rp, rt, type, bed;
-                            for (DocumentSnapshot i : li) {
-                                if (i.exists()) {
-                                    n = (String) i.get("Name");
-                                    ListOFHostels.add(n);
-                                    p = (String) i.get("Phone");
-                                    r = (String) i.getString("Rentp");
-                                    d = (String) i.getString("Distance");
-                                    add = (String) i.get("Address");
-                                    hf = (String) i.get("HostelFor");
-                                    nb = (String) i.get("NumberB");
-                                    np = (String) i.get("NumberP");
-                                    rp = (String) i.get("Rentp");
-                                    rt = (String) i.get("Rentt");
-                                    type = (String) i.get("Type");
-                                    bed = (String) i.get("NoBedrooms");
-                                    String uu = (String) i.get("Url");
-                                    String lat = (String) i.get("Latitude");
-                                    String lon = (String) i.get("Longitute");
-                                    Entry entry = new Entry(n, p, r, d, R.drawable.ic_house, add, hf, nb, np, rp, rt, type, bed, uu, lat, lon);
-                                    mEntryList.add(entry);
-                                    recyclerView.setAdapter(mRecyclerViewAdaptor);
-                                    mRecyclerViewAdaptor.dataChange(MainActivity.this, mEntryList);
-                                } else
-                                    break;
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<DocumentSnapshot> li;
+                    li = queryDocumentSnapshots.getDocuments();
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        String n = "", p = "", r = "", d = "";
+                        String add, hf, nb, np, rp, rt, type, bed;
+                        for (DocumentSnapshot i : li) {
+                            if (i.exists()) {
+                                n = (String) i.get("Name");
+                                ListOFHostels.add(n);
+                                p = (String) i.get("Phone");
+                                r = (String) i.getString("Rentp");
+                                d = (String) i.getString("Distance");
+                                add = (String) i.get("Address");
+                                hf = (String) i.get("HostelFor");
+                                nb = (String) i.get("NumberB");
+                                np = (String) i.get("NumberP");
+                                rp = (String) i.get("Rentp");
+                                rt = (String) i.get("Rentt");
+                                type = (String) i.get("Type");
+                                bed = (String) i.get("NoBedrooms");
+                                String uu = (String) i.get("Url");
+                                String lat = (String) i.get("Latitude");
+                                String lon = (String) i.get("Longitute");
+                                Entry entry = new Entry(n, p, r, d, R.drawable.ic_house, add, hf, nb, np, rp, rt, type, bed, uu, lat, lon);
+                                mEntryList.add(entry);
+                                recyclerView.setAdapter(mRecyclerViewAdaptor);
+                                mRecyclerViewAdaptor.dataChange(MainActivity.this, mEntryList);
+                            } else
+                                break;
 
-                            }
-                            mRecyclerViewAdaptor.copy();
                         }
+                        mRecyclerViewAdaptor.copy();
                     }
                 });
         findViewById(R.id.Signout).setOnClickListener(view -> {
@@ -98,8 +111,14 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.ViewHostels).setOnClickListener(view -> {
             startActivity(new Intent(this, HostelActivity.class));
         });
-        findViewById(R.id.adminstration).setOnClickListener( view ->{
+        findViewById(R.id.adminstration).setOnClickListener(view -> {
             startActivity(new Intent(this, StudentActivity.class));
+        });
+        findViewById(R.id.changePassword).setOnClickListener(view -> {
+            showRecoverPasswordDialog();
+        });
+        findViewById(R.id.contactUs).findViewById(R.id.contactUs).setOnClickListener(view ->{
+            openChrome("http://rnu.edu.ng/contact_us.php");
         });
     }
 
@@ -189,41 +208,111 @@ public class MainActivity extends AppCompatActivity {
         flist = new ArrayList<>();
         mEntryList.clear();
         mFirebaseFirestore.collection("hostellist").get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        List<DocumentSnapshot> li;
-                        li = queryDocumentSnapshots.getDocuments();
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            String n = "", p = "", r = "", d = "";
-                            String add, hf, nb, np, rp, rt, type, bed;
-                            for (DocumentSnapshot i : li) {
-                                if (i.exists()) {
-                                    n = (String) i.get("Name");
-                                    ListOFHostels.add(n);
-                                    p = (String) i.get("Phone");
-                                    r = (String) i.getString("Rentp");
-                                    d = (String) i.getString("Distance");
-                                    add = (String) i.get("Address");
-                                    hf = (String) i.get("HostelFor");
-                                    nb = (String) i.get("NumberB");
-                                    np = (String) i.get("NumberP");
-                                    rp = (String) i.get("Rentp");
-                                    rt = (String) i.get("Rentt");
-                                    type = (String) i.get("Type");
-                                    bed = (String) i.get("NoBedrooms");
-                                    String uu = (String) i.get("Url");
-                                    String lat = (String) i.get("Latitude");
-                                    String lon = (String) i.get("Longitute");
-                                    Entry entry = new Entry(n, p, r, d, R.drawable.ic_house, add, hf, nb, np, rp, rt, type, bed, uu, lat, lon);
-                                    mEntryList.add(entry);
-                                    recyclerView.setAdapter(mRecyclerViewAdaptor);
-                                    mRecyclerViewAdaptor.dataChange(MainActivity.this, mEntryList);
-                                } else
-                                    break;
-                            }
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<DocumentSnapshot> li;
+                    li = queryDocumentSnapshots.getDocuments();
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        String n = "", p = "", r = "", d = "";
+                        String add, hf, nb, np, rp, rt, type, bed;
+                        for (DocumentSnapshot i : li) {
+                            if (i.exists()) {
+                                n = (String) i.get("Name");
+                                ListOFHostels.add(n);
+                                p = (String) i.get("Phone");
+                                r = (String) i.getString("Rentp");
+                                d = (String) i.getString("Distance");
+                                add = (String) i.get("Address");
+                                hf = (String) i.get("HostelFor");
+                                nb = (String) i.get("NumberB");
+                                np = (String) i.get("NumberP");
+                                rp = (String) i.get("Rentp");
+                                rt = (String) i.get("Rentt");
+                                type = (String) i.get("Type");
+                                bed = (String) i.get("NoBedrooms");
+                                String uu = (String) i.get("Url");
+                                String lat = (String) i.get("Latitude");
+                                String lon = (String) i.get("Longitute");
+                                Entry entry = new Entry(n, p, r, d, R.drawable.ic_house, add, hf, nb, np, rp, rt, type, bed, uu, lat, lon);
+                                mEntryList.add(entry);
+                                recyclerView.setAdapter(mRecyclerViewAdaptor);
+                                mRecyclerViewAdaptor.dataChange(MainActivity.this, mEntryList);
+                            } else
+                                break;
                         }
                     }
                 });
+    }
+
+
+    private void showRecoverPasswordDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Recover Password");
+        LinearLayout linearLayout = new LinearLayout(this);
+        final EditText emailet = new EditText(this);
+
+        // write the email using which you registered
+        emailet.setText("Email");
+        emailet.setMinEms(16);
+        emailet.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        linearLayout.addView(emailet);
+        linearLayout.setPadding(10, 10, 10, 10);
+        builder.setView(linearLayout);
+
+        // Click on Recover and a email will be sent to your registered email id
+        builder.setPositiveButton("Recover", (dialog, which) -> {
+            String emaill = emailet.getText().toString().trim();
+            beginRecovery(emaill);
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+        builder.create().show();
+    }
+
+    ProgressDialog loadingBar;
+
+    private void beginRecovery(String emaill) {
+        loadingBar = new ProgressDialog(this);
+        loadingBar.setMessage("Sending Email....");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();
+
+        // calling sendPasswordResetEmail
+        // open your email and write the new
+        // password and then you can login
+        mAuth.sendPasswordResetEmail(emaill).addOnCompleteListener((OnCompleteListener<Void>) task -> {
+            loadingBar.dismiss();
+            if (task.isSuccessful()) {
+                // if isSuccessful then done messgae will be shown
+                // and you can change the password
+                Toast.makeText(MainActivity.this, "Recovery email sent", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                finish();
+            } else {
+                Toast.makeText(MainActivity.this, "Error Occured", Toast.LENGTH_LONG).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                loadingBar.dismiss();
+                Toast.makeText(MainActivity.this, "Error Failed", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    void openChrome(String uri) {
+        CustomTabsIntent.Builder customIntent = new CustomTabsIntent.Builder();
+        customIntent.setToolbarColor(ContextCompat.getColor(this, R.color.colorAccent));
+        customIntent.setShowTitle(false);
+        openCustomTab(this, customIntent.build(), Uri.parse(uri));
+    }
+
+    private void openCustomTab(Activity activity, CustomTabsIntent customTabsIntent, Uri uri) {
+        String packageName = "com.android.chrome";
+        if (packageName != null) {
+            customTabsIntent.intent.setPackage(packageName);
+            customTabsIntent.launchUrl(activity, uri);
+        } else {
+            startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        }
     }
 }

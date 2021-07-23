@@ -24,7 +24,6 @@
             android:text=" DashBoard"
             android:textStyle="bold" />
 
-
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -123,6 +122,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/changePassword"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
@@ -206,8 +206,52 @@
             android:id="@+id/home"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:layout_margin="5dp"
             android:paddingTop="?attr/actionBarSize"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/contactUs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="#141E61"
+            app:cardCornerRadius="15dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
+                    android:text="Contact School Management"
+
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    app:textAllCaps="true" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/TextAppearance.MaterialComponents.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Having any difficulties, Contact the School Management"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="13sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.cardview.widget.CardView>
+
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -219,12 +263,10 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:layout_margin="20dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/bg_login"
         android:gravity="center"
-        android:padding="10dp"
         android:text="Signout"
         android:textColor="#ffffff" />
-
 
 </RelativeLayout>

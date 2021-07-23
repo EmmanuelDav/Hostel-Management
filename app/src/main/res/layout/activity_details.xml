@@ -335,7 +335,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/selector_xml_btn_yellow"
-                            android:text="Phone:"
+                            android:text="Contact Hostel Owner:"
                             android:gravity="center"
                             android:layout_margin="10dp"
                             android:padding="15dp"
@@ -356,7 +356,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/selector_xml_btn_yellow"
-                            android:text="Find this address:"
+                            android:text="locate on Google Map:"
                             android:gravity="center"
                             android:padding="15dp"
                             android:textColor="#ffffff" />
