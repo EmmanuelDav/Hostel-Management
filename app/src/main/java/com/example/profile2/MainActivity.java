@@ -86,6 +86,21 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+        findViewById(R.id.Signout).setOnClickListener(view -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent I = new Intent(MainActivity.this, SignInActivity.class);
+            startActivity(I);
+            finish();
+        });
+        findViewById(R.id.AcademicCourses).setOnClickListener(vew -> {
+            startActivity(new Intent(this, AcademicCourseActivity.class));
+        });
+        findViewById(R.id.ViewHostels).setOnClickListener(view -> {
+            startActivity(new Intent(this, HostelActivity.class));
+        });
+        findViewById(R.id.adminstration).setOnClickListener( view ->{
+            startActivity(new Intent(this, StudentActivity.class));
+        });
     }
 
 
@@ -173,8 +188,7 @@ public class MainActivity extends AppCompatActivity {
     void getAllResult() {
         flist = new ArrayList<>();
         mEntryList.clear();
-        mFirebaseFirestore.collection("hostellist")
-                .get()
+        mFirebaseFirestore.collection("hostellist").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -207,14 +221,9 @@ public class MainActivity extends AppCompatActivity {
                                     mRecyclerViewAdaptor.dataChange(MainActivity.this, mEntryList);
                                 } else
                                     break;
-
                             }
-
                         }
                     }
                 });
-
-
     }
-
 }
