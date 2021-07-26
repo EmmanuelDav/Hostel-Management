@@ -4,12 +4,21 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -20,6 +29,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,6 +37,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.profile2.Adapter.RecyclerViewAdaptor;
 import com.example.profile2.model.Entry;
+import com.example.profile2.model.HostelOccupant;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,9 +47,16 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static com.example.profile2.HostelDetails.sHostelOccupants;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -47,6 +65,11 @@ public class MainActivity extends AppCompatActivity {
     List<Entry> mEntryList;
     ArrayList<String> ListOFHostels, flist;
     FirebaseAuth mAuth;
+    Button generatePDFbtn;
+    int pageHeight = 1120;
+    int pagewidth = 792;
+    Bitmap bmp, scaledbmp;
+    final int PERMISSION_REQUEST_CODE = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,23 +175,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.Signout: {
+            case R.id.Signout:
                 FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                 firebaseAuth.signOut();
                 Intent i = new Intent(MainActivity.this, SignInActivity.class);
                 startActivity(i);
                 finish();
                 break;
-            }
-            case R.id.SRA: {
-                sortRent();
-                break;
-            }
-            case R.id.SDA: {
-                sortdist();
-                break;
-            }
 
+            case R.id.SRA:
+                 loadPDF();
+                break;
+
+            default:
+
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -314,5 +335,82 @@ public class MainActivity extends AppCompatActivity {
         } else {
             startActivity(new Intent(Intent.ACTION_VIEW, uri));
         }
+    }
+
+    void loadPDF(){
+        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.logo11);
+        scaledbmp = Bitmap.createScaledBitmap(bmp, 140, 140, false);
+        if (checkPermission()) {
+            Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+            generatePDF();
+        } else {
+            requestPermission();
+        }
+    }
+
+    private boolean checkPermission() {
+        int permission1 = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
+        int permission2 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
+        return permission1 == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0) {
+                boolean writeStorage = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                boolean readStorage = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                if (writeStorage && readStorage) {
+                    Toast.makeText(this, "Permission Granted..", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Permission Denined.", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
+        }
+    }
+
+
+    private void generatePDF() {
+        PdfDocument pdfDocument = new PdfDocument();
+        Paint paint = new Paint();
+        Paint title = new Paint();
+        PdfDocument.PageInfo mypageInfo = new PdfDocument.PageInfo.Builder(pagewidth, pageHeight, 1).create();
+        PdfDocument.Page myPage = pdfDocument.startPage(mypageInfo);
+        Canvas canvas = myPage.getCanvas();
+        canvas.drawBitmap(scaledbmp, 56, 40, paint);
+        title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        title.setTextSize(15);
+        title.setColor(ContextCompat.getColor(this, R.color.dark_blue));
+        canvas.drawText("Micheal ", 209, 100, title);
+        canvas.drawText("Renaissance University", 209, 80, title);
+        title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+        title.setColor(ContextCompat.getColor(this, R.color.dark_blue));
+        title.setTextSize(15);
+        title.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText("Summary of Available Hostels and students.", 396, 560, title);
+
+        int x = 20;
+        if (sHostelOccupants != null){
+            for (HostelOccupant a : sHostelOccupants)
+            {
+                canvas.drawText(a.getDepartment() + "\t" + a.getName() + "\t" + a.getLevel(), 10, x, title);
+                x+=20;
+            }
+        }
+        pdfDocument.finishPage(myPage);
+        File file = new File(Environment.getExternalStorageDirectory(), "Project_Report.pdf");
+        try {
+            pdfDocument.writeTo(new FileOutputStream(file));
+            Toast.makeText(MainActivity.this, "PDF file generated successfully.", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        pdfDocument.close();
     }
 }

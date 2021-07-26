@@ -40,7 +40,7 @@ public class HostelDetails extends AppCompatActivity {
     private Uri filepath;
     RecyclerView recyclerView;
     HostelOccupantAdapter mHostelOccupantAdapter;
-    ArrayList<HostelOccupant> sHostelOccupants;
+   static ArrayList<HostelOccupant> sHostelOccupants;
     FirebaseFirestore mFirebaseFirestore;
 
     @Override
