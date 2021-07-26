@@ -1,10 +1,12 @@
 package com.example.profile2_Admin;
 
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Menu;
@@ -22,7 +24,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.Toolbar;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -44,12 +48,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Owner extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
     Button SignOut;
     String Username;
     CardView addHostel;
     FirebaseAuth mAuth;
     LinearLayoutCompat aadminstration;
-
     Toolbar toolbar;
     NavigationView navigationMenu;
     DrawerLayout drawerLayout;
@@ -64,13 +68,13 @@ public class Owner extends AppCompatActivity implements NavigationView.OnNavigat
         toolbar = findViewById(R.id.toolBar);
         navigationMenu = findViewById(R.id.nav);
         drawerLayout = findViewById(R.id.drawerL);
-        // recyclerView = findViewById(R.id.studentRecyclerView);
         aadminstration = findViewById(R.id.adminstration);
         Intent i = getIntent();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.openNav, R.string.closeNav);
         drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
         navigationMenu.setNavigationItemSelectedListener(this);
         Username = (String) i.getSerializableExtra("Username");
         addHostel.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +105,7 @@ public class Owner extends AppCompatActivity implements NavigationView.OnNavigat
         findViewById(R.id.recoverPassword).setOnClickListener(view -> {
             showRecoverPasswordDialog();
         });
+
 
     }
 
@@ -189,20 +194,14 @@ public class Owner extends AppCompatActivity implements NavigationView.OnNavigat
                 startActivity(intent);
             }
             case R.id.contact_us:  {
-
+                openChrome("http://rnu.edu.ng/contact_us.php");
             }
             case R.id.aboutUs:  {
-
+                startActivity(new Intent(this, AboutUs.class));
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return false;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.nav_menu, menu);
-        return true;
     }
 
     @Override
@@ -215,6 +214,30 @@ public class Owner extends AppCompatActivity implements NavigationView.OnNavigat
     public void onConfigurationChanged(@NonNull @NotNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         toggle.onConfigurationChanged(newConfig);
+    }
+
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        if (toggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    void openChrome(String uri) {
+        CustomTabsIntent.Builder customIntent = new CustomTabsIntent.Builder();
+        customIntent.setToolbarColor(ContextCompat.getColor(this, R.color.colorAccent));
+        customIntent.setShowTitle(false);
+        openCustomTab(this, customIntent.build(), Uri.parse(uri));
+    }
+
+    private void openCustomTab(Activity activity, CustomTabsIntent customTabsIntent, Uri uri) {
+        String packageName = "com.android.chrome";
+        if (packageName != null) {
+            customTabsIntent.intent.setPackage(packageName);
+            customTabsIntent.launchUrl(activity, uri);
+        } else {
+            startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        }
     }
 }
 

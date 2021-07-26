@@ -35,12 +35,11 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final HostelOccupant e = mHostelOccupants.get(position);
-        holder.depatment.setText("Department : "+e.getDepartment());
-        holder.level.setText("Level : "+e.getLevel());
-        holder.ph.setText("Phone Number : "+ e.getPhoneNum());
-        holder.name.setText("Name : "+e.getName());
-        Picasso.get().load(e.getPicture()).placeholder(R.drawable.ic_house).into(holder.image);
-
+        holder.depatment.setText(e.getDepartment());
+        holder.level.setText(e.getLevel());
+        holder.ph.setText(e.getPhoneNum());
+        holder.name.setText(e.getName());
+        Picasso.get().load(e.getPicture()).placeholder(R.drawable.logo11).into(holder.image);
     }
 
     @Override
@@ -62,4 +61,4 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
             name = itemView.findViewById(R.id.name);
         }
     }
-};
+}

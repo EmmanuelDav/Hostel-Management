@@ -11,14 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/accent"
-        app:title="Student = 203"
+        app:title="Student"
         app:titleTextColor="#fff"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/righteous"
-        android:textSize="18sp"
+        android:textSize="21sp"
         android:padding="20dp"
         android:text="Student"/>
 

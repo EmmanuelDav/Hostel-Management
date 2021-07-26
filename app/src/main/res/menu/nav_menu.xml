@@ -4,20 +4,26 @@
 
     <item
         android:title="Administrator"
+        android:icon="@drawable/ic_baseline_admin_panel_settings_24"
         android:id="@+id/Administrator"/>
     <item
         android:title="Academic Course"
+        android:icon="@drawable/ic_baseline_school_24"
         android:id="@+id/academy"/>
     <item
         android:title="Reset Password"
+        android:icon="@drawable/ic_baseline_code_24"
         android:id="@+id/reset"/>
     <item
         android:title="Add Hostel"
+        android:icon="@drawable/ic_baseline_house_24"
         android:id="@+id/hostel"/>
     <item
         android:title="Contact us"
+        android:icon="@drawable/ic_baseline_contact_support_24"
         android:id="@+id/contact_us"/>
     <item
         android:title="About Us"
+        android:icon="@drawable/ic_baseline_info_24"
         android:id="@+id/aboutUs"/>
 </menu>

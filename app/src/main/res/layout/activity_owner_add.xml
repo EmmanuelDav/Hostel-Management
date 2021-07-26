@@ -6,13 +6,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title="Add New Hostel"
-        app:titleTextColor="#fff"
-        android:background="@color/accent"/>
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:title="Add New Hostel"
+            app:titleTextColor="#fff"
+            android:background="@color/accent"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/view"
+            android:layout_width="wrap_content"
+            android:layout_height="?actionBarSize"
+            android:text="View Hostels"
+            android:textColor="#fff"
+            android:fontFamily="@font/righteous"
+            android:padding="5dp"
+            android:background="@color/accent"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -288,7 +309,7 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <com.google.android.material.button.MaterialButton
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/choose"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -300,11 +321,10 @@
                         android:fontFamily="@font/gotham"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Choose Image of hostel"
-                        app:cornerRadius="10dp" />
+                        android:text="Choose Image of hostel" />
 
 
-                    <com.google.android.material.button.MaterialButton
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/addHostelOccupant"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -316,8 +336,7 @@
                         android:gravity="center"
                         android:padding="10dp"
                         android:text="Add Occupant"
-                        android:textColor="#fff"
-                        app:cornerRadius="10dp" />
+                        android:textColor="#fff" />
 
                 </LinearLayout>
 
@@ -334,7 +353,6 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/gotham"
                         android:padding="5dp"
-
                         android:text="No image selected"
                         android:textColor="#000"
                         android:textSize="18sp" />
@@ -354,7 +372,9 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/gotham"
                         android:gravity="center"
+                        android:drawablePadding="10dp"
                         android:padding="10dp"
+                        android:drawableEnd="@drawable/ic_baseline_location_on_24"
                         android:text="Record Hostel Location"
                         android:textColor="#fff" />
                 </LinearLayout>
@@ -366,7 +386,7 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <com.google.android.material.button.MaterialButton
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/SUBMIT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -377,11 +397,9 @@
                         android:padding="10dp"
                         android:text="publish hostels"
                         android:textAllCaps="true"
-                        android:textColor="#fff" />
+                        android:textColor="@color/black" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
     </androidx.core.widget.NestedScrollView>
-
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -158,6 +158,9 @@ public class AddHostelActivity extends AppCompatActivity {
                 }
             }
         });
+        findViewById(R.id.view).setOnClickListener( view ->{
+            startActivity(new Intent(AddHostelActivity.this, MainActivity.class));
+        });
 
     }
 
