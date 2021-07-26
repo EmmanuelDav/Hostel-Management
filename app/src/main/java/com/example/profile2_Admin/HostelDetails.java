@@ -16,13 +16,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.profile2_Admin.Adapter.HostelOccupantAdapter;
+import com.example.profile2_Admin.Adapter.StudentAdapter;
 import com.example.profile2_Admin.model.Entry;
 import com.example.profile2_Admin.model.HostelOccupant;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -37,7 +35,7 @@ public class HostelDetails extends AppCompatActivity {
     Button phone, Loc;
     private Uri filepath;
     RecyclerView recyclerView;
-    HostelOccupantAdapter mHostelOccupantAdapter;
+    StudentAdapter mStudentAdapter;
     ArrayList<HostelOccupant> sHostelOccupants;
     FirebaseFirestore mFirebaseFirestore;
 
@@ -92,7 +90,7 @@ public class HostelDetails extends AppCompatActivity {
         mFirebaseFirestore = FirebaseFirestore.getInstance();
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        mHostelOccupantAdapter = new HostelOccupantAdapter(this, sHostelOccupants);
+        mStudentAdapter = new StudentAdapter(this, sHostelOccupants);
         mFirebaseFirestore.collection("HostelOccupant").get().addOnSuccessListener(pQueryDocumentSnapshots -> {
             List<DocumentSnapshot> li;
             li = pQueryDocumentSnapshots.getDocuments();
@@ -109,7 +107,7 @@ public class HostelDetails extends AppCompatActivity {
                             u = (String) i1.get("Url");
                             HostelOccupant sHostelOccupant = new HostelOccupant(n, d, r, u, p);
                             sHostelOccupants.add(sHostelOccupant);
-                            recyclerView.setAdapter(mHostelOccupantAdapter);
+                            recyclerView.setAdapter(mStudentAdapter);
                         }
                     }
                 }

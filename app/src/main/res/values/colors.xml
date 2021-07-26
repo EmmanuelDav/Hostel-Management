@@ -7,6 +7,9 @@
     <color name="black">#000</color>
     <color name="grey">#D3D3D3</color>
     <color name="dark_blue">#3023AE</color>
+    <color name="accent">#867AE9</color>
+    <color name="primary">#FFF5AB</color>
+    <color name="semi_primary">#FFCEAD</color>
     <color name="purple">#c86dd7</color>
 
     <color name="login_form_details">#ccffffff</color>

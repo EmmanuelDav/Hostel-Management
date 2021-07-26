@@ -16,7 +16,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.profile2_Admin.CustomFilter;
+import com.example.profile2_Admin.model.CustomFilter;
 import com.example.profile2_Admin.HostelDetails;
 import com.example.profile2_Admin.R;
 import com.example.profile2_Admin.model.Entry;

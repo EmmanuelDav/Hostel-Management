@@ -1,4 +1,4 @@
-package com.example.profile2_Admin;
+package com.example.profile2_Admin.model;
 
 import android.widget.Filter;
 

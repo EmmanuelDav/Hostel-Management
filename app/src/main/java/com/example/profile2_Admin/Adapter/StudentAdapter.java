@@ -16,13 +16,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class HostelOccupantAdapter extends RecyclerView.Adapter<HostelOccupantAdapter.ViewHolder> {
+public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHolder> {
     @NonNull
 
     private Context context;
     List<HostelOccupant> mHostelOccupants;
 
-    public HostelOccupantAdapter(@NonNull Context pContext, List<HostelOccupant> pHostelOccupants) {
+    public StudentAdapter(@NonNull Context pContext, List<HostelOccupant> pHostelOccupants) {
         context = pContext;
         mHostelOccupants = pHostelOccupants;
     }

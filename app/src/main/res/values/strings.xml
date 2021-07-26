@@ -43,8 +43,8 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="facu" />
     <string name="faculty">"Nile University consists of six faculties united by a commitment to providing education of the highest quality.  Every faculty is led by reputable academics dedicated to driving innovation in research and learning. Discover the programs available in each faculty.  "</string>
-
+    <string name="openNav">Open</string>
+    <string name="closeNav">Close</string>
 
 </resources>

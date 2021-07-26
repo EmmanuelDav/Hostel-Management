@@ -4,9 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:elevation="4dp"
-
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    android:background="@color/colorAccent">
+    android:background="@color/accent">
 
 </androidx.appcompat.widget.Toolbar>

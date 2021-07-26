@@ -27,6 +27,7 @@
                 android:layout_width="wrap_content"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/righteous"
                 android:layout_marginTop="10dp"
                 android:text="Click on the Image to select A profile Picture"
                 android:layout_gravity="center_horizontal"/>
@@ -41,6 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
+                    android:fontFamily="@font/righteous"
                     android:hint="Name"
                     android:inputType="text"
                     android:textColor="#000"
@@ -56,6 +58,7 @@
                     android:id="@+id/department"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:fontFamily="@font/righteous"
                     android:layout_margin="10dp"
                     android:hint="Department"
                     android:inputType="text"
@@ -74,6 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:hint="Level"
+                    android:fontFamily="@font/righteous"
                     android:inputType="text"
                     android:textColor="#000"
                     android:textSize="18sp" />
@@ -89,6 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
+                    android:fontFamily="@font/righteous"
                     android:hint="Phone Number"
                     android:inputType="phone"
                     android:textColor="#000"
@@ -110,7 +115,7 @@
                 android:id="@+id/SUBMIT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorAccent"
+                android:backgroundTint="@color/accent"
                 app:cardCornerRadius="5dp">
 
                 <TextView
@@ -119,6 +124,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:padding="10dp"
+                    android:fontFamily="@font/righteous"
                     android:textAllCaps="true"
                     android:text="Add"
                     android:textColor="#FFFFFF"

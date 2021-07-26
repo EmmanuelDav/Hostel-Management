@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/profilePic"
                 android:layout_gravity="center"
+                android:fontFamily="@font/righteous"
                 android:padding="10dp"
                 android:text="Name"
                 android:textColor="@color/black"
@@ -42,15 +43,35 @@
                 android:layout_height="1dp"
                 android:background="@color/grey" />
 
-            <TextView
-                android:id="@+id/roomNum"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/profilePic"
-                android:padding="10dp"
-                android:text="Room Number"
-                android:textColor="@color/black"
-                android:textSize="17sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/righteous"
+                    android:padding="10dp"
+                    android:text="Room Number :"
+                    android:textColor="@color/accent"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/roomNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/profilePic"
+                    android:padding="10dp"
+                    android:text="Room Number"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
 
             <View
                 android:layout_width="match_parent"
@@ -58,77 +79,180 @@
                 android:background="@color/grey" />
 
 
-            <TextView
-                android:id="@+id/gender"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
-                android:padding="10dp"
-                android:text="Gender"
-                android:textColor="@color/black"
-                android:textSize="17sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/righteous"
+                    android:padding="10dp"
+                    android:text="Gender :"
+                    android:textColor="@color/accent"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name"
+                    android:padding="10dp"
+                    android:text="Gender"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/grey" />
 
-            <TextView
-                android:id="@+id/department"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
-                android:padding="10dp"
-                android:text="Department"
-                android:textColor="@color/black"
-                android:textSize="17sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/righteous"
+                    android:padding="10dp"
+                    android:text="Department :"
+                    android:textColor="@color/accent"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/department"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name"
+                    android:padding="10dp"
+                    android:text="Department"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/grey" />
 
-            <TextView
-                android:id="@+id/Level"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/department"
-                android:padding="10dp"
-                android:text="Level"
-                android:textColor="@color/black"
-                android:textSize="17sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/righteous"
+                    android:padding="10dp"
+                    android:text="Level :"
+                    android:textColor="@color/accent"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/Level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/department"
+                    android:padding="10dp"
+                    android:text="Level"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/grey" />
 
-            <TextView
-                android:id="@+id/stateOfOrigin"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/department"
-                android:padding="10dp"
-                android:text="State of Origin"
-                android:textColor="@color/black"
-                android:textSize="17sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/righteous"
+                    android:padding="10dp"
+                    android:text="State of Origin :"
+                    android:textColor="@color/accent"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/stateOfOrigin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/department"
+                    android:padding="10dp"
+                    android:text="State of Origin"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/grey" />
 
-            <TextView
-                android:id="@+id/phoneNum"
-                android:layout_width="wrap_content"
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="right"
-                android:padding="10dp"
-                android:text="Phone number"
-                android:textColor="@color/black"
-                android:textSize="17sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/righteous"
+                    android:padding="10dp"
+                    android:text="Phone Number :"
+                    android:textColor="@color/accent"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/phoneNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="right"
+                    android:padding="10dp"
+                    android:text="Phone number"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.cardview.widget.CardView>
 
