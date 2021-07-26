@@ -7,17 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".StudentActivity">
 
-
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/accent"
+            app:title="Student info"
+            app:titleTextColor="#fff"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:textStyle="bold"
+            android:fontFamily="@font/righteous"
             android:padding="10dp"
             style="@style/TextAppearance.MaterialComponents.Headline5"
             android:text="Student News"/>
@@ -50,11 +57,11 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="7dp"
                         android:text="School News "
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         android:textStyle="bold"
+                        android:fontFamily="@font/righteous"
                         app:textAllCaps="true" />
 
                     <com.google.android.material.textview.MaterialTextView
@@ -62,6 +69,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:fontFamily="@font/righteous"
                         android:text="Up to date News And Information of Students Academic Section"
                         android:textColor="@color/colorPrimary"
                         android:textSize="13sp" />
@@ -90,11 +98,11 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="7dp"
                         android:text="Admission"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="14dp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
+                        android:fontFamily="@font/righteous"
                         app:textAllCaps="true" />
 
                     <com.google.android.material.textview.MaterialTextView
@@ -102,6 +110,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:fontFamily="@font/righteous"
                         android:text="Registration for Admission for Students "
                         android:textColor="@color/colorPrimary"
                         android:textSize="13sp" />
@@ -115,6 +124,7 @@
         <TextView
             style="@style/TextAppearance.MaterialComponents.Headline5"
             android:layout_width="match_parent"
+            android:fontFamily="@font/righteous"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:textSize="16sp"

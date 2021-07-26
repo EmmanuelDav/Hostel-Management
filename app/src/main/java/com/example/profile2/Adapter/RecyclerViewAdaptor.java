@@ -16,7 +16,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.profile2.CustomFilter;
+import com.example.profile2.model.CustomFilter;
 import com.example.profile2.HostelDetails;
 import com.example.profile2.R;
 import com.example.profile2.model.Entry;
@@ -60,7 +60,7 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
         holder.dist.setText(String.valueOf(e.getDistance()));
         holder.ph.setText(String.valueOf(e.getPhone()));
         holder.re.setText(String.valueOf(e.getRent()));
-        Picasso.get().load(e.getUrl()).placeholder(R.drawable.ic_house).into(holder.image);
+        Picasso.get().load(e.getUrl()).placeholder(R.drawable.logo11).into(holder.image);
         holder.forr.setText("For:" + e.getHf());
         holder.c.setOnClickListener(new View.OnClickListener() {
             @Override

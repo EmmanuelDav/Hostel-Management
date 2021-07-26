@@ -80,7 +80,7 @@ public class HostelDetails extends AppCompatActivity {
         mHostelName.setText(e.getName().toString());
         mHostelAddress.setText(e.getAdd().toString());
         String z = e.getDistance().toString();
-        Glide.with(getApplicationContext()).load(e.getUrl()).placeholder(R.drawable.splash).into(imageH);
+        Glide.with(getApplicationContext()).load(e.getUrl()).placeholder(R.drawable.logo11).into(imageH);
         mHostelDistance.setText(z.substring(9));
         rentPerPerson.setText(e.getRp().toString());
         rentPerMonth.setText(e.getRt().toString());

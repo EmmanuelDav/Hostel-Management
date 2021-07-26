@@ -21,7 +21,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text=" DashBoard"
+            android:text="DashBoard"
+            android:fontFamily="@font/righteous"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -51,7 +52,7 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="7dp"
+                        android:fontFamily="@font/righteous"
                         android:text="Administrator"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
@@ -63,6 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:fontFamily="@font/righteous"
                         android:text="Administration Panel for Adding and View Student Details"
                         android:textColor="@color/colorPrimary"
                         android:textSize="13sp" />
@@ -91,7 +93,7 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="7dp"
+                        android:fontFamily="@font/righteous"
                         android:text="Academic Course"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14dp"
@@ -103,6 +105,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:fontFamily="@font/righteous"
                         android:text="Registration for each Room for each Student"
                         android:textColor="@color/colorPrimary"
                         android:textSize="13sp" />
@@ -140,10 +143,10 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
                         android:text="Change Password"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
+                        android:fontFamily="@font/righteous"
                         android:textStyle="bold"
                         app:textAllCaps="true" />
 
@@ -151,6 +154,7 @@
                         style="@style/TextAppearance.MaterialComponents.Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/righteous"
                         android:gravity="center"
                         android:text="Change and Configure Password"
                         android:textColor="@color/colorPrimary"
@@ -180,10 +184,10 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="7dp"
                         android:text="View Hostels"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14dp"
+                        android:fontFamily="@font/righteous"
                         android:textStyle="bold"
                         app:textAllCaps="true" />
 
@@ -191,6 +195,7 @@
                         style="@style/TextAppearance.MaterialComponents.Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/righteous"
                         android:gravity="center"
                         android:text="active audience for all platforms"
                         android:textColor="@color/colorPrimary"
@@ -231,11 +236,10 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="7dp"
+                    android:fontFamily="@font/righteous"
                     android:text="Contact School Management"
-
                     android:textColor="@color/colorPrimary"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     app:textAllCaps="true" />
 
@@ -243,6 +247,7 @@
                     style="@style/TextAppearance.MaterialComponents.Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/righteous"
                     android:gravity="center"
                     android:text="Having any difficulties, Contact the School Management"
                     android:textColor="@color/colorPrimary"
@@ -262,6 +267,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:fontFamily="@font/righteous"
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
         android:background="@drawable/bg_login"

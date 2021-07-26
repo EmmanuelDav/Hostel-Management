@@ -74,7 +74,6 @@ public class HostelActivity extends AppCompatActivity {
                                     mRecyclerViewAdaptor.dataChange(HostelActivity.this, mEntryList);
                                 } else
                                     break;
-
                             }
                             mRecyclerViewAdaptor.copy();
                         }
