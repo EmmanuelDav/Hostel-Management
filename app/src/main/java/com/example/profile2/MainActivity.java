@@ -8,16 +8,17 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Typeface;
-import android.graphics.pdf.PdfDocument;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.InputType;
+import android.util.Log;
+import android.util.LruCache;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -37,26 +38,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.profile2.Adapter.RecyclerViewAdaptor;
 import com.example.profile2.model.Entry;
-import com.example.profile2.model.HostelOccupant;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.pdf.PdfWriter;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import static com.example.profile2.HostelDetails.sHostelOccupants;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -113,8 +115,8 @@ public class MainActivity extends AppCompatActivity {
                                 String lon = (String) i.get("Longitute");
                                 Entry entry = new Entry(n, p, r, d, R.drawable.ic_house, add, hf, nb, np, rp, rt, type, bed, uu, lat, lon);
                                 mEntryList.add(entry);
-                                recyclerView.setAdapter(mRecyclerViewAdaptor);
                                 mRecyclerViewAdaptor.dataChange(MainActivity.this, mEntryList);
+                                recyclerView.setAdapter(mRecyclerViewAdaptor);
                             } else
                                 break;
 
@@ -368,7 +370,7 @@ public class MainActivity extends AppCompatActivity {
                 if (writeStorage && readStorage) {
                     Toast.makeText(this, "Permission Granted..", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "Permission Denined.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Permission Denied..", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
@@ -376,41 +378,67 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void generatePDF() {
-        PdfDocument pdfDocument = new PdfDocument();
-        Paint paint = new Paint();
-        Paint title = new Paint();
-        PdfDocument.PageInfo mypageInfo = new PdfDocument.PageInfo.Builder(pagewidth, pageHeight, 1).create();
-        PdfDocument.Page myPage = pdfDocument.startPage(mypageInfo);
-        Canvas canvas = myPage.getCanvas();
-        canvas.drawBitmap(scaledbmp, 56, 40, paint);
-        title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
-        title.setTextSize(15);
-        title.setColor(ContextCompat.getColor(this, R.color.dark_blue));
-        canvas.drawText("Micheal ", 209, 100, title);
-        canvas.drawText("Renaissance University", 209, 80, title);
-        title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-        title.setColor(ContextCompat.getColor(this, R.color.dark_blue));
-        title.setTextSize(15);
-        title.setTextAlign(Paint.Align.CENTER);
-        canvas.drawText("Summary of Available Hostels and students.", 396, 560, title);
-
-        int x = 20;
-        if (sHostelOccupants != null){
-            for (HostelOccupant a : sHostelOccupants)
-            {
-                canvas.drawText(a.getDepartment() + "\t" + a.getName() + "\t" + a.getLevel(), 10, x, title);
-                x+=20;
-            }
+    public void generatePDF() {
+        if(RecyclerViewAdaptor.mPrintView.isEmpty()){
+            Toast.makeText(this, "cant create PDF, hostels might be empty", Toast.LENGTH_SHORT).show();
+            return;
         }
-        pdfDocument.finishPage(myPage);
-        File file = new File(Environment.getExternalStorageDirectory(), "Project_Report.pdf");
+        loadingBar = new ProgressDialog(this);
+        loadingBar.setMessage("Creating Pdf....");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();
+
+        ArrayList<View> viewArrayList = mRecyclerViewAdaptor.getPrintView(); // A function from Adapter class which returns ArrayList of VIEWS
+        Document document = new Document(PageSize.A4);
+        final File extStore = new File((Environment.getExternalStorageDirectory() + File.separator + "Users"), "Pdf");
+
+        if (!extStore.exists()) {
+            extStore.mkdirs();
+        }
+        String path = extStore.getAbsolutePath() + "/" + System.currentTimeMillis() + ".pdf";
+        Log.d("TAG", "Save to: " + path);
+        loadingBar.dismiss();
+
         try {
-            pdfDocument.writeTo(new FileOutputStream(file));
-            Toast.makeText(MainActivity.this, "PDF file generated successfully.", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
+            PdfWriter.getInstance(document, new FileOutputStream(path));
+        } catch (DocumentException | FileNotFoundException e) {
             e.printStackTrace();
         }
-        pdfDocument.close();
+
+        for (int im = 0; im < viewArrayList.size(); im++) {
+            // Iterate till the last of the array list and add each view individually to the document.
+            try {
+                viewArrayList.get(im).buildDrawingCache();         //Adding the content to the document
+                Bitmap bmp = viewArrayList.get(im).getDrawingCache();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                Image image = Image.getInstance(stream.toByteArray());
+                image.scalePercent(70);
+                image.setAlignment(Image.MIDDLE);
+                if (!document.isOpen()) {
+                    document.open();
+                }
+                document.add(image);
+
+            } catch (Exception ex) {
+                Log.e("TAG-ORDER PRINT ERROR", ex.getMessage());
+            }
+        }
+
+        if (document.isOpen()) {
+            document.close();
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Success")
+                .setMessage("PDF File Generated Successfully.")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(Uri.parse(path), "application/pdf");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(intent);
+                }).show();
+
     }
 }

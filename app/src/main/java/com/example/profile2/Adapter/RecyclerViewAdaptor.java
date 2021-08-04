@@ -26,13 +26,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdaptor.ViewHolder> implements Filterable {
-    @NonNull
 
     private Context context;
     public List<Entry> entryList, filterList;
     CustomFilter filter;
     private List<Entry> ForSearch;
     int pp;
+    public static ArrayList<View> mPrintView = new ArrayList<>();
 
     public void dataChange(Context context, List<Entry> entryList) {
         this.context = context;
@@ -54,6 +54,7 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        mPrintView.add(holder.itemView);
         final Entry e = entryList.get(position);
         pp = position;
         holder.name.setText(e.getName());
@@ -85,6 +86,8 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
         }
     }
 
+
+
     @Override
     public int getItemCount() {
         return entryList.size();
@@ -96,6 +99,10 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
             filter = new CustomFilter(filterList, this);
         }
         return filter;
+    }
+
+    public ArrayList<View> getPrintView() {
+        return mPrintView;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
