@@ -33,6 +33,8 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
     CustomFilter filter;
     private List<Entry> ForSearch;
     int pp;
+    public static ArrayList<View> mPrintView = new ArrayList<>();
+
 
     public void dataChange(Context context, List<Entry> entryList) {
         this.context = context;
@@ -43,8 +45,8 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
     public RecyclerViewAdaptor(@NonNull Context context, List<Entry> entryList) {
         this.context = context;
         this.entryList = entryList;
-        ForSearch = new ArrayList<>(this.entryList);
-        this.filterList = entryList;
+//        ForSearch = new ArrayList<>(this.entryList);
+//        this.filterList = entryList;
     }
 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -54,6 +56,7 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        mPrintView.add(holder.itemView);
         final Entry e = entryList.get(position);
         pp = position;
         holder.name.setText(e.getName());
@@ -72,10 +75,6 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
         });
     }
 
-    public void copy() {
-        ForSearch.clear();
-        ForSearch.addAll(entryList);
-    }
 
     public void changenow() {
         entryList.clear();
@@ -97,6 +96,11 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
         }
         return filter;
     }
+
+    public ArrayList<View> getPrintView() {
+        return mPrintView;
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;

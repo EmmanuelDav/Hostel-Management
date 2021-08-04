@@ -54,6 +54,10 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
+    implementation 'com.opencsv:opencsv:4.6'
+    implementation 'com.itextpdf:itextpdf:5.0.6'
+
+
 }
 repositories {
     mavenCentral()

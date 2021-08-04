@@ -82,63 +82,14 @@ public class MainActivity extends AppCompatActivity {
                                     break;
 
                             }
-                            mRecyclerViewAdaptor.copy();
                         }
                     }
                 });
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.hostelfinder, menu);
-        mRecyclerViewAdaptor.copy();
-        MenuItem search = menu.findItem(R.id.action_search);
-        androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) MenuItemCompat.getActionView(search);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                getSearchResult(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (newText.equals("")) {
-                    getAllResult();
-                }
-                return false;
-            }
-        });
-        return true;
-    }
 
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.Signout: {
-                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-                firebaseAuth.signOut();
-                Intent i = new Intent(MainActivity.this, SignInActivity.class);
-                startActivity(i);
-                finish();
-                break;
-            }
-            case R.id.SRA: {
-                sortRent();
-                break;
-            }
-            case R.id.SDA: {
-                sortdist();
-                break;
-            }
-
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     private void sortdist() {
         for (int i = 0; i < mEntryList.size(); i++) {

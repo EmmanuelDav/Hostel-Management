@@ -26,4 +26,8 @@
         android:title="About Us"
         android:icon="@drawable/ic_baseline_info_24"
         android:id="@+id/aboutUs"/>
+    <item
+        android:title="Print Report"
+        android:icon="@drawable/ic_baseline_picture_as_pdf_24"
+        android:id="@+id/pdf"/>
 </menu>

@@ -6,9 +6,12 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +35,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.profile2_Admin.Adapter.RecyclerViewAdaptor;
 import com.example.profile2_Admin.Adapter.StudentAdapter;
 import com.example.profile2_Admin.model.HostelOccupant;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,9 +45,18 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +71,7 @@ public class Owner extends AppCompatActivity implements NavigationView.OnNavigat
     NavigationView navigationMenu;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
+    RecyclerViewAdaptor mRecyclerviewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +109,7 @@ public class Owner extends AppCompatActivity implements NavigationView.OnNavigat
                 finish();
             }
         });
+        mRecyclerviewAdapter = new RecyclerViewAdaptor(this,null);
         findViewById(R.id.AcademicCourses).setOnClickListener(view -> {
             startActivity(new Intent(Owner.this, AcademicCoursesActivity.class));
         });
@@ -199,6 +214,9 @@ public class Owner extends AppCompatActivity implements NavigationView.OnNavigat
             case R.id.aboutUs:  {
                 startActivity(new Intent(this, AboutUs.class));
             }
+            case R.id.pdf:  {
+                generatePDF();
+            }
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return false;
@@ -238,6 +256,67 @@ public class Owner extends AppCompatActivity implements NavigationView.OnNavigat
         } else {
             startActivity(new Intent(Intent.ACTION_VIEW, uri));
         }
+    }
+
+    public void generatePDF() {
+        if(RecyclerViewAdaptor.mPrintView.isEmpty()){
+            Toast.makeText(this, "cant create PDF, hostels might be empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        loadingBar = new ProgressDialog(this);
+        loadingBar.setMessage("Creating Pdf....");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();
+
+        ArrayList<View> viewArrayList = mRecyclerviewAdapter.getPrintView(); // A function from Adapter class which returns ArrayList of VIEWS
+        Document document = new Document(PageSize.A4);
+        final File extStore = new File((Environment.getExternalStorageDirectory() + File.separator + "Hostel_Management"), "Hostels_Pdf");
+
+        if (!extStore.exists()) {
+            extStore.mkdirs();
+        }
+        String path = extStore.getAbsolutePath() + "/" + System.currentTimeMillis() + ".pdf";
+        Log.d("TAG", "Save to: " + path);
+        loadingBar.dismiss();
+
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream(path));
+        } catch (DocumentException | FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        for (int im = 0; im < viewArrayList.size(); im++) {
+            // Iterate till the last of the array list and add each view individually to the document.
+            try {
+                viewArrayList.get(im).buildDrawingCache();         //Adding the content to the document
+                Bitmap bmp = viewArrayList.get(im).getDrawingCache();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                Image image = Image.getInstance(stream.toByteArray());
+                image.scalePercent(70);
+                image.setAlignment(Image.MIDDLE);
+                if (!document.isOpen()) {
+                    document.open();
+                }
+                document.add(image);
+
+            } catch (Exception ex) {
+                Log.e("TAG-ORDER PRINT ERROR", ex.getMessage());
+            }
+        }
+
+        if (document.isOpen()) {
+            document.close();
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Owner.this);
+        builder.setTitle("Success")
+                .setMessage("PDF File Generated Successfully. file name is Hostel_Management")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
+                    Toast.makeText(this, "PdF printed successfully, you can find it in your external storage", Toast.LENGTH_SHORT).show();
+                }).show();
+
     }
 }
 
