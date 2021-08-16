@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,9 +39,10 @@ import static com.example.profile2_Admin.AddHostelActivity.staticHostelName;
 public class AddHostelFragmentDialog extends DialogFragment {
     private static final String TAG = AddHostelFragmentDialog.class.getSimpleName();
     private  String URLIMAGE;
-    String name, level, department, phoneNum;
-    EditText mSerialN, mName, mLevel, mPhoneNum, mDepartment;
+    String name, level, department, phoneNum,stateOfOrigin;
+    EditText mSerialN, mName, mLevel, mPhoneNum, mDepartment,stateoforigin;
     CardView mSubmitButton;
+    Spinner gender;
     AlertDialog progressDialog;
     ImageView mCircleImageView;
     private ProgressDialog mProgressDialog;
@@ -60,6 +62,8 @@ public class AddHostelFragmentDialog extends DialogFragment {
         mPhoneNum = dialogView.findViewById(R.id.phoneNum);
         mCircleImageView = dialogView.findViewById(R.id.profilePic);
         mDepartment = dialogView.findViewById(R.id.department);
+        gender = dialogView.findViewById(R.id.gender);
+        stateoforigin = dialogView.findViewById(R.id.stateOfOrigin);
         mName.requestFocus();
         mSubmitButton = dialogView.findViewById(R.id.SUBMIT);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
@@ -99,8 +103,9 @@ public class AddHostelFragmentDialog extends DialogFragment {
         level = mLevel.getText().toString();
         phoneNum = mPhoneNum.getText().toString();
         department = mDepartment.getText().toString();
+        stateOfOrigin = stateoforigin.getText().toString();
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
-        if (name.isEmpty() || level.isEmpty() || phoneNum.isEmpty() || department.isEmpty()|| staticHostelName.isEmpty()) {
+        if (name.isEmpty() || level.isEmpty() || phoneNum.isEmpty() || department.isEmpty()|| staticHostelName.isEmpty() || stateOfOrigin.isEmpty()) {
             progressDialog.dismiss();
             Toast.makeText(getContext(), "Empty blank found Add Hostel Name", Toast.LENGTH_LONG).show();
         } else {
@@ -111,15 +116,13 @@ public class AddHostelFragmentDialog extends DialogFragment {
             map.put("phoneNum", phoneNum);
             map.put("Url",URLIMAGE);
             map.put("hostel name",staticHostelName);
-            db.collection("HostelOccupant").add(map).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentReference> pTask) {
-                    progressDialog.dismiss();
-                    Toast.makeText(getContext(), "Data Updated Successfully", Toast.LENGTH_SHORT).show();
-                    getDialog().dismiss();
-                }
+            map.put("state_of_origin",stateOfOrigin);
+            map.put("Gender",gender.getSelectedItem().toString());
+            db.collection("HostelOccupant").add(map).addOnCompleteListener(pTask -> {
+                progressDialog.dismiss();
+                Toast.makeText(getContext(), "Data Updated Successfully", Toast.LENGTH_SHORT).show();
+                getDialog().dismiss();
             });
-
         }
     }
 

@@ -179,6 +179,7 @@ public class AddHostelActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case LocationPermission: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -281,6 +282,7 @@ public class AddHostelActivity extends AppCompatActivity {
         map.put("Url", URLIMAGE);
         map.put("Latitude", Double.toString(lat));
         map.put("Longitude", Double.toString(lon));
+        map.put("HostelId", db.collection("hostellist").getId());
             db.collection("hostellist").add(map).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {

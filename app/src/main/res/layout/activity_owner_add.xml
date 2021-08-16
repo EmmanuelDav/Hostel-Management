@@ -103,6 +103,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="8dp"
                     android:hint="Rent Per Person in Naira"
+                    app:prefixText="₦"
                     android:orientation="horizontal">
 
                     <EditText
@@ -295,7 +296,7 @@
                         android:fontFamily="@font/gotham"
                         android:hint="Phone Number"
                         android:inputType="phone"
-                        android:maxLength="10"
+                        android:maxLength="12"
                         android:padding="5dp"
                         android:textColor="#000"
                         android:textSize="18sp" />
