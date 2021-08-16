@@ -121,13 +121,13 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/dateOfBirth"
+                    android:id="@+id/stateOfOrigin"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
                     android:fontFamily="@font/righteous"
                     android:hint="stateOfOrigin"
-                    android:inputType="phone"
+                    android:inputType="text"
                     android:textColor="#000"
                     android:textSize="18sp" />
 

@@ -39,6 +39,9 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         holder.level.setText(e.getLevel());
         holder.ph.setText(e.getPhoneNum());
         holder.name.setText(e.getName());
+        holder.num.setText(String.valueOf(1+position));
+        holder.state.setText(e.getStateOfOrigin());
+        holder.gender.setText(e.getGender());
         Picasso.get().load(e.getPicture()).placeholder(R.drawable.logo11).into(holder.image);
     }
 
@@ -50,7 +53,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
-        TextView level, depatment, ph, name;
+        TextView level, depatment, ph, name, state, num, gender;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,6 +62,9 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
             level = itemView.findViewById(R.id.Level);
             ph = itemView.findViewById(R.id.phoneNum);
             name = itemView.findViewById(R.id.name);
+            state = itemView.findViewById(R.id.stateOfOrigin);
+            num = itemView.findViewById(R.id.roomNum);
+            gender = itemView.findViewById(R.id.gender);
         }
     }
 }

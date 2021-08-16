@@ -7,17 +7,15 @@ public class HostelOccupant {
     String picture;
     String phoneNum;
     String Gender;
-    String DateOfBirth;
     String StateOfOrigin;
 
-    public HostelOccupant(String name, String department, String level, String picture, String phoneNum, String gender, String dateOfBirth, String stateOfOrigin) {
+    public HostelOccupant(String name, String department, String level, String picture, String phoneNum, String gender, String stateOfOrigin) {
         this.name = name;
         this.department = department;
         this.level = level;
         this.picture = picture;
         this.phoneNum = phoneNum;
         Gender = gender;
-        DateOfBirth = dateOfBirth;
         StateOfOrigin = stateOfOrigin;
     }
 
@@ -51,10 +49,6 @@ public class HostelOccupant {
 
     public String getGender() {
         return Gender;
-    }
-
-    public String getDateOfBirth() {
-        return DateOfBirth;
     }
 
     public String getStateOfOrigin() {

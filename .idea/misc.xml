@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/activity_details.xml" value="0.27589743589743587" />
         <entry key="app/src/main/res/layout/activity_hostel.xml" value="0.28020833333333334" />
         <entry key="app/src/main/res/layout/activity_owner_add.xml" value="0.28020833333333334" />
         <entry key="app/src/main/res/layout/add_hostel_occupant.xml" value="0.28020833333333334" />
+        <entry key="app/src/main/res/layout/hostel_occupant.xml" value="0.22" />
       </map>
     </option>
   </component>

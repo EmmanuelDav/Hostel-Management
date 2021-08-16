@@ -39,19 +39,20 @@ public class StudentActivity extends AppCompatActivity {
             List<DocumentSnapshot> li;
             li = pQueryDocumentSnapshots.getDocuments();
             if (!pQueryDocumentSnapshots.isEmpty()) {
-                String n = "", p = "", r = "", d = "", u = "";
+                String n = "", p = "", r = "", d = "", u = "",f ="",g = "";
                 for (DocumentSnapshot i1 : li) {
                     if (i1.exists()) {
-                        String hsname = (String) i1.get("hostel name");
-                        n = (String) i1.get("name");
-                        r = (String) i1.get("level");
-                        d = (String) i1.get("department");
-                        p = (String) i1.get("phoneNum");
-                        u = (String) i1.get("Url");
-                        HostelOccupant sHostelOccupant = new HostelOccupant(n, d, r, u, p);
-                        sHostelOccupants.add(sHostelOccupant);
-                        recyclerView.setAdapter(mStudentAdapter);
-
+                        String hsname =(String) i1.get("hostel name");
+                            n = (String) i1.get("name");
+                            r = (String) i1.get("level");
+                            d = (String) i1.get("department");
+                            p = (String) i1.get("phoneNum");
+                            u = (String) i1.get("Url");
+                            f = (String) i1.get("state_of_origin");
+                            g = (String) i1.get("Gender");
+                            HostelOccupant sHostelOccupant = new HostelOccupant(n, d, r, u, p,f,g);
+                            sHostelOccupants.add(sHostelOccupant);
+                            recyclerView.setAdapter(mStudentAdapter);
                     }
                 }
             }
