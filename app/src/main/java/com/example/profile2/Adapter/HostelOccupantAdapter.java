@@ -39,9 +39,11 @@ public class HostelOccupantAdapter extends RecyclerView.Adapter<HostelOccupantAd
         holder.level.setText(e.getLevel());
         holder.ph.setText(e.getPhoneNum());
         holder.name.setText(e.getName());
+        holder.num.setText(String.valueOf(1+position));
+        holder.state.setText(e.getStateOfOrigin());
+        holder.gender.setText(e.getGender());
         Picasso.get().load(e.getPicture()).placeholder(R.drawable.logo11).into(holder.image);
     }
-
     @Override
     public int getItemCount() {
         return mHostelOccupants.size();
@@ -50,7 +52,7 @@ public class HostelOccupantAdapter extends RecyclerView.Adapter<HostelOccupantAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
-        TextView level, depatment, ph, name;
+        TextView level, depatment, ph, name, state, num, gender;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,6 +61,9 @@ public class HostelOccupantAdapter extends RecyclerView.Adapter<HostelOccupantAd
             level = itemView.findViewById(R.id.Level);
             ph = itemView.findViewById(R.id.phoneNum);
             name = itemView.findViewById(R.id.name);
+            state = itemView.findViewById(R.id.stateOfOrigin);
+            num = itemView.findViewById(R.id.roomNum);
+            gender = itemView.findViewById(R.id.gender);
         }
     }
-};
+}
