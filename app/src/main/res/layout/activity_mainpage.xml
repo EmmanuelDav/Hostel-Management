@@ -7,22 +7,38 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/accent"
+        app:title="DashBoard"
+        app:titleTextColor="@color/white" />
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical"
+        android:padding="5dp">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_margin="5dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/user" />
 
-        <TextView
-            style="@style/TextAppearance.MaterialComponents.Headline5"
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="DashBoard"
-            android:fontFamily="@font/righteous"/>
+            android:layout_margin="5dp"
+            android:fontFamily="@font/righteous"
+            android:gravity="center"
+            android:text="Welcome to hostel Management where you can view hostels and its occupants"
+            android:textSize="16sp" />
+
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -33,17 +49,17 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/adminstration"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="#46A5CF"
+                app:cardBackgroundColor="@color/yellow"
                 app:cardCornerRadius="15dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
-                    android:layout_height="150dp"
+                    android:layout_height="100dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="10dp">
@@ -62,8 +78,8 @@
                         style="@style/TextAppearance.MaterialComponents.Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:fontFamily="@font/righteous"
+                        android:gravity="center"
                         android:text="Administration Panel for Adding and View Student Details"
                         android:textColor="@color/colorPrimary"
                         android:textSize="13sp" />
@@ -84,7 +100,7 @@
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="100dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="15dp">
@@ -103,8 +119,8 @@
                         style="@style/TextAppearance.MaterialComponents.Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:fontFamily="@font/righteous"
+                        android:gravity="center"
                         android:text="Registration for each Room for each Student"
                         android:textColor="@color/colorPrimary"
                         android:textSize="13sp" />
@@ -122,9 +138,9 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/changePassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/changePassword"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
@@ -133,7 +149,7 @@
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="100dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="10dp">
@@ -142,10 +158,10 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/righteous"
                         android:text="Change Password"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
-                        android:fontFamily="@font/righteous"
                         android:textStyle="bold"
                         app:textAllCaps="true" />
 
@@ -175,7 +191,7 @@
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="100dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="15dp">
@@ -183,10 +199,10 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/righteous"
                         android:text="View Hostels"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14dp"
-                        android:fontFamily="@font/righteous"
                         android:textStyle="bold"
                         app:textAllCaps="true" />
 
@@ -210,24 +226,24 @@
             android:id="@+id/home"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
             android:layout_margin="5dp"
-            android:paddingTop="?attr/actionBarSize"/>
+            android:paddingTop="?attr/actionBarSize"
+            android:visibility="gone" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/contactUs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
-            android:layout_margin="4dp"
             android:layout_weight="1"
             app:cardBackgroundColor="#141E61"
             app:cardCornerRadius="15dp">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="100dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="15dp">
@@ -260,16 +276,16 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/Signout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:fontFamily="@font/righteous"
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/bg_login"
+        android:backgroundTint="@color/yellow"
+        android:fontFamily="@font/righteous"
         android:gravity="center"
         android:text="Signout"
         android:textColor="#ffffff" />
