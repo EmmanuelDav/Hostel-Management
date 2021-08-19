@@ -19,6 +19,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".AvailableRoomsActivity"
+            android:exported="true" />
+        <activity
             android:name=".Hostel_Info"
             android:exported="true" />
         <activity android:name=".StudentActivity" />

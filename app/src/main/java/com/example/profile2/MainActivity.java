@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, AcademicCourseActivity.class));
         });
         findViewById(R.id.ViewHostels).setOnClickListener(view -> {
-            startActivity(new Intent(this, HostelActivity.class));
+            startActivity(new Intent(this, Hostel_Info.class));
         });
         findViewById(R.id.adminstration).setOnClickListener(view -> {
             startActivity(new Intent(this, StudentActivity.class));

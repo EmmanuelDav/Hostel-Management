@@ -17,7 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="290dp"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
             android:src="@drawable/ill_login">
 
         </ImageView>

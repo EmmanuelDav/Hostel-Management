@@ -24,7 +24,7 @@ public class Hostel_Info extends AppCompatActivity {
             startActivity(data);
         });
         findViewById(R.id.available_rooms).setOnClickListener(view -> {
-            startActivity(new Intent(this, StudentActivity.class));
+            startActivity(new Intent(this, AvailableRoomsActivity.class));
         });
     }
 }

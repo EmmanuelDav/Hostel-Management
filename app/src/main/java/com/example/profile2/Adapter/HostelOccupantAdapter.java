@@ -17,8 +17,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class HostelOccupantAdapter extends RecyclerView.Adapter<HostelOccupantAdapter.ViewHolder> {
-    @NonNull
 
+    @NonNull
     private Context context;
     List<HostelOccupant> mHostelOccupants;
 

@@ -5,7 +5,8 @@
       <map>
         <entry key="app/src/main/res/font/righteous.xml" value="0.30564102564102563" />
         <entry key="app/src/main/res/layout/activity_academic_course.xml" value="0.2657407407407407" />
-        <entry key="app/src/main/res/layout/activity_details.xml" value="0.2657407407407407" />
+        <entry key="app/src/main/res/layout/activity_available_rooms_activty.xml" value="0.28020833333333334" />
+        <entry key="app/src/main/res/layout/activity_details.xml" value="0.1624886741165811" />
         <entry key="app/src/main/res/layout/activity_hostel.xml" value="0.26481481481481484" />
         <entry key="app/src/main/res/layout/activity_hostel_info.xml" value="0.28020833333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2657407407407407" />
@@ -17,11 +18,15 @@
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.28020833333333334" />
         <entry key="app/src/main/res/layout/activity_student.xml" value="0.18324250681198911" />
         <entry key="app/src/main/res/layout/add_hostel_occupant.xml" value="0.2722222222222222" />
+        <entry key="app/src/main/res/layout/avalible_hostel.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/avalible_hostels.xml" value="0.28020833333333334" />
         <entry key="app/src/main/res/layout/dialog.xml" value="0.28020833333333334" />
         <entry key="app/src/main/res/layout/fragment_dialog.xml" value="0.28020833333333334" />
+        <entry key="app/src/main/res/layout/hostel_avalible.xml" value="0.28020833333333334" />
         <entry key="app/src/main/res/layout/hostel_occupant.xml" value="0.2722222222222222" />
         <entry key="app/src/main/res/layout/layout_listitem.xml" value="0.2722222222222222" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.28020833333333334" />
+        <entry key="app/src/main/res/layout/view_hostel_occupant_dialog.xml" value="0.28020833333333334" />
       </map>
     </option>
   </component>

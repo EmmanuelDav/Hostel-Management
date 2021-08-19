@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/hostel_image"
+        android:layout_width="200dp"
+        android:layout_height="230dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/logo11" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/hostel_image"
+        android:fontFamily="@font/righteous"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Hostel Name"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/hostel_image"
+        android:fontFamily="@font/righteous"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Distance From Pict: 2km" />
+
+    <TextView
+        android:id="@+id/occupant_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/distance"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/hostel_image"
+        android:fontFamily="@font/righteous"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Phone:1234567890" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/view_hostelOccupant"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/occupant_num"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/hostel_image"
+        android:fontFamily="@font/righteous"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="View Hostel Occupant" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/hostel_image"
+        android:background="@color/grey"/>
+
+</RelativeLayout>
